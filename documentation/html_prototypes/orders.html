@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+
+        td{
+            background-color: aqua;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+        table{
+            width: 80%;
+            margin: auto;
+        }
+
+        td{
+            text-align: center;
+        }
+        
+        tr{
+            height: 40px;
+
+        }
+
+    </style>
+</head>
+<body>
+    <table class="main-table">
+        <thead><td colspan="8">Orders</td></thead>
+
+        <tr>
+            <td><a href="#">Orders</a></td>
+            <td><a href="#">Clients</a></td>
+            <td><a href="#">Cars</a></td>
+            <td colspan="5"><button>Add</button></td>
+        </tr>
+
+        <tr>
+            <td colspan="8">
+                <form action="POST">
+                    <label for="datefrom">Date from: </label>
+                    <input type="date" id="datefrom">
+                    
+                    <label for="by">By: </label>
+                    <input type="date" id="by">
+                    
+                    <input type="submit" class="submit_button" value="">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Car number</td>
+            <td>Client password number</td>
+            <td>Add date</td>
+            <td>Rental Time</td>
+            <td>Car rental cost</td>
+            <td>Total cost</td>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td>412</td>
+            <td>ab241</td>
+            <td>02.03.2018</td>
+            <td>2</td>
+            <td>85.00</td>
+            <td>170.00</td>
+            <td>badge</td>
+            <td>badge</td>
+        </tr>
+        <tr>
+            <td>542</td>
+            <td>ab4123</td>
+            <td>12.03.2018</td>
+            <td>3</td>
+            <td>77.00</td>
+            <td>231.00</td>
+            <td>badge</td>
+            <td>badge</td>
+        </tr>        
+    </table>
+</body>
+</html>
