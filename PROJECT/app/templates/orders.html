@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+</head>
+<body>
+    <table class="main-table">
+        <thead><td colspan="8">Orders</td></thead>
+
+        <tr>
+            <td><a href="#">Orders</a></td>
+            <td><a href="#">Clients</a></td>
+            <td><a href="#">Cars</a></td>
+            <td colspan="5"><a href="/add-order"><button>Add</button></a></td>
+        </tr>
+
+        <tr>
+            <td colspan="8">
+                <form action="POST">
+                    <label for="datefrom">Date from: </label>
+                    <input type="date" id="datefrom">
+                    
+                    <label for="by">By: </label>
+                    <input type="date" id="by">
+                    
+                    <input type="submit" class="submit_button" value="">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Car number</td>
+            <td>Client password number</td>
+            <td>Add date</td>
+            <td>Rental Time</td>
+            <td>Car rental cost</td>
+            <td>Total cost</td>
+            <td colspan="2"></td>
+        </tr>
+
+    </table>
+</body>
+</html>
