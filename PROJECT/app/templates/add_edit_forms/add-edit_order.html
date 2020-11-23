@@ -1,5 +1,11 @@
 {% extends 'add_edit_form.html' %}
 
+{% block links %}
+    <td class="chosen-table-block"><a href="{{ url_for('get_all_orders') }}">Orders</a></td>
+    <td class="table-block"><a href="{{ url_for('get_all_clients') }}">Clients</a></td>
+    <td class="table-block"><a href="{{ url_for('get_all_tours') }}">Tours</a></td>
+{% endblock links %}
+
 {% block content %}
      <tr>
         <td colspan="5" class="edit-form-block">

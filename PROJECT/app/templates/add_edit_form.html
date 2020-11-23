@@ -15,13 +15,12 @@
             <td colspan="8" class="table-title"><b>{{ title }}</b></td>
         </thead>
 
-        <form action="" method="POST">
+        <form action="{{ submit_url }}" method="POST">
             {{ form.hidden_tag() }}
 
             <tr class="main-row">
-                <td class="chosen-table-block"><a href="{{ url_for('get_all_orders') }}">Orders</a></td>
-                <td class="table-block"><a href="{{ url_for('get_all_clients') }}">Clients</a></td>
-                <td class="table-block"><a href="{{ url_for('get_all_tours') }}">Tours</a></td>
+                {% block links %}
+                {% endblock links %}
 
                 <td colspan="2">
                     <a href="orders.html"><button class="cancel-button">Cancel</button></a>

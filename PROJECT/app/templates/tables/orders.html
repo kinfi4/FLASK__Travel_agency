@@ -40,8 +40,8 @@
             <td>{{ order.days }}</td>
             <td>{{ order.tour_day_cost }}</td>
             <td>{{ order.total_cost }}</td>
-            <td>{{ url_for('static', 'icons/edit.png') }}</td>
-            <td>{{ url_for('static', 'icons/delete.png') }}</td>
+            <td><img src="{{ url_for('static', filename='icons/edit.png') }}" alt="edit" class="edit-icon"></td>
+            <td><img src="{{ url_for('static', filename='icons/delete.png') }}" alt="delete" class="delete-icon"></td>
         </tr>
     {% endfor %}
 

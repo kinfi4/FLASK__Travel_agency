@@ -10,7 +10,10 @@ class Client(db.Model):
 
     @property
     def number_of_orders(self):
-        return len(Order.query.filter(client_pass=self.passport))
+        return len(list(Order.query.filter(Order.client_pass == self.passport)))
+
+    def __repr__(self):
+        return f'Client: {self.first_name} {self.last_name}'
 
 
 class Tour(db.Model):
@@ -24,6 +27,9 @@ class Tour(db.Model):
     @property
     def number_of_orders(self):
         return len(Order.query.filter(tour_id=self.id))
+
+    def __repr__(self):
+        return f'Tour: {self.name}'
 
 
 class Order(db.Model):
@@ -41,3 +47,5 @@ class Order(db.Model):
     def total_cost(self):
         return self.tour_day_cost * self.days
 
+    def __repr__(self):
+        return f'{self.id}, {self.client_pass}'

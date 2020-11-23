@@ -4,7 +4,7 @@
     <td colspan="8">
         <form action="POST" class="datetime-form">
             <label for="rentalcost-from">Rental cost from: </label>
-            <input type="number" id="rentalcost-from" class="numeric-input">
+            <input type="number" id="rentalcost-from" class="numeric-input" min="1">
 
             <label for="rentalcost-by" class="right-label">Rental cost from by: </label>
             <input type="number" id="rentalcost-by" class="numeric-input">
@@ -39,8 +39,8 @@
             <td>{{ tour.hotel }}</td>
             <td>{{ tour.tour_includes }}</td>
             <td>{{ tour.number_of_orders }}</td>
-            <td>{{ url_for('static', 'icons/edit.png') }}</td>
-            <td>{{ url_for('static', 'icons/delete.png') }}</td>
+            <td><img src="{{ url_for('static', filename='icons/edit.png') }}" alt="edit" class="edit-icon"></td>
+            <td><img src="{{ url_for('static', filename='icons/delete.png') }}" alt="delete" class="delete-icon"></td>
         </tr>
     {% endfor %}
 
