@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/edit-item_styles.css">
+
+</head>
+
+<body>
+    <table class="edit-table">
+        <thead><td colspan="8" class="table-title"><b>ADD CLIENT</b></td></thead>
+
+        <form action="" method="POST">
+            <tr class="main-row">    
+                <td class="table-block"><a href="orders.html">Orders</a></td>
+                <td class="chosen-table-block"><a href="">Clients</a></td>
+                <td class="table-block"><a href="tours.html">Tours</a></td>
+                
+                <td colspan="2">
+                    <a href="clients.html"><button class="cancel-button">Cancel</button></a>
+                    <input type="submit" class="add-button" value="Save">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="first_name" class="labels">Client first name: </label>
+                    <input type="text" name="first_name" id="first_name">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="last_name" class="labels">Client last name: </label>
+                    <input type="text" name="last_name" id="last_name">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="passport" class="labels">Passport id: </label>
+                    <input type="text" name="passport" id="passport">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="adddate" class="labels">Register date: </label>
+                    <input type="date">
+                </td>
+            </tr>
+    
+        </form>
+     
+    </table>
+
+</body>
+</html>

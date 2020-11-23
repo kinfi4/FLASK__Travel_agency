@@ -1,0 +1,50 @@
+.cancel-button{
+    background-color: rgb(233, 233, 233);
+    color: rgb(26, 24, 24);
+    font-weight: bold;
+    width: 180px;
+    height: 40px;
+    border-radius: 8px;
+    margin: 10px;
+    float: right;
+    margin-right: 30px;
+    border: 0.6px solid black;
+
+    transition: all 0.5s linear;
+}
+
+.cancel-button:hover{
+    background-color: rgb(61, 61, 61);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    width: 180px;
+    height: 40px;
+    border-radius: 8px;
+    margin: 10px;
+    float: right;
+    margin-right: 30px;
+    border: 0.6px solid black;
+}
+
+.edit-table{
+    width: 60%;
+    margin: auto;
+}
+
+.main-row{
+    height: 50px;
+}
+
+.edit-form-block{
+    text-align: left;
+    font-size: 20px;
+    height: 70px;
+}
+
+.labels{
+    margin-left: 50px;
+}
+
+input, select{
+    font-size: 15px;
+}

@@ -1,0 +1,49 @@
+{% extends 'base_table.html' %}
+
+{% block sortform %}
+    <td colspan="8">
+        <form action="POST" class="datetime-form">
+            <label for="datefrom">Date from: </label>
+            <input type="date" id="datefrom">
+
+            <label for="by" class="right-label">By: </label>
+            <input type="date" id="by">
+
+            <input type="submit" class="submit-button" value="">
+        </form>
+    </td>
+{% endblock sortform %}
+
+
+{% block links %}
+    <td class="chosen-table-block"><a href="{{ url_for('get_all_orders') }}">Orders</a></td>
+    <td class="table-block"><a href="{{ url_for('get_all_clients') }}">Clients</a></td>
+    <td class="table-block"><a href="{{ url_for('get_all_tours') }}">Tours</a></td>
+{% endblock links %}
+
+{% block content %}
+    <tr>
+        <td class="column-title">Tour number</td>
+        <td class="column-title">Client password number</td>
+        <td class="column-title">Add date</td>
+        <td class="column-title">Days</td>
+        <td class="column-title">Tour day cost</td>
+        <td class="column-title">Total cost</td>
+        <td colspan="2" class="column-title"></td>
+    </tr>
+
+    {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.client_pass }}</td>
+            <td>{{ order.add_date }}</td>
+            <td>{{ order.days }}</td>
+            <td>{{ order.tour_day_cost }}</td>
+            <td>{{ order.total_cost }}</td>
+            <td>{{ url_for('static', 'icons/edit.png') }}</td>
+            <td>{{ url_for('static', 'icons/delete.png') }}</td>
+        </tr>
+    {% endfor %}
+
+
+{% endblock content %}

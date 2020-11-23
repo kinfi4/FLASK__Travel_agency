@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/edit-item_styles.css">
+
+</head>
+
+<body>
+    <table class="edit-table">
+        <thead><td colspan="8" class="table-title"><b>ADD TOUR</b></td></thead>
+
+        <form action="" method="POST">
+            <tr class="main-row">    
+                <td class="table-block"><a href="orders.html">Orders</a></td>
+                <td class="table-block"><a href="clients.html">Clients</a></td>
+                <td class="chosen-table-block"><a href="tours.html">Tours</a></td>
+                
+                <td colspan="2">
+                    <a href="tours.html"><button class="cancel-button">Cancel</button></a>
+                    <input type="submit" class="add-button" value="Save">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="tourname" class="labels">Tour name: </label>
+                    <input type="text" name="tout_name" id="tourname">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="hotel" class="labels">Hotel title: </label>
+                    <input type="text" name="hotel" id="hotel">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="tour_includes" class="labels">Tour includes: </label>
+                    <input type="text" name="tour_includes" id="tour_includes">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="cost" class="labels">Day cost: </label>
+                    <input type="number" id="cost" name="cost">
+                </td>
+            </tr>
+    
+        </form>
+     
+    </table>
+
+</body>
+</html>

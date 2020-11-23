@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit-item_styles.css') }}">
+
+</head>
+
+<body>
+    <table class="edit-table">
+        <thead>
+            <td colspan="8" class="table-title"><b>{{ title }}</b></td>
+        </thead>
+
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+
+            <tr class="main-row">
+                <td class="chosen-table-block"><a href="{{ url_for('get_all_orders') }}">Orders</a></td>
+                <td class="table-block"><a href="{{ url_for('get_all_clients') }}">Clients</a></td>
+                <td class="table-block"><a href="{{ url_for('get_all_tours') }}">Tours</a></td>
+
+                <td colspan="2">
+                    <a href="orders.html"><button class="cancel-button">Cancel</button></a>
+                    <input type="submit" class="add-button" value="Save">
+                </td>
+            </tr>
+
+            {% block content %}
+            {% endblock content %}
+
+        </form>
+
+    </table>
+
+</body>
+</html>

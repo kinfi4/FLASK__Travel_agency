@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <table class="main-table">
+        <thead><td colspan="8" class="table-title"><b>TOURS</b></td></thead>
+
+        <tr>
+            <td class="table-block"><a href="orders.html">Orders</a></td>
+            <td class="table-block"><a href="clients.html">Clients</a></td>
+            <td class="chosen-table-block"><a href="">Tours</a></td>
+            <td colspan="5"><a href="tour.html"><button class="add-button">Add</button></a> </td>
+        </tr>
+        
+        <tr>
+            <td colspan="8">
+                <form action="POST" class="datetime-form">
+                    <label for="rentalcost-from">Rental cost from: </label>
+                    <input type="number" id="rentalcost-from" class="numeric-input">
+                    
+                    <label for="rentalcost-by" class="right-label">Rental cost from by: </label>
+                    <input type="number" id="rentalcost-by" class="numeric-input">
+                    
+                    <input type="submit" class="submit-button" value="">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td class="column-title">Tour name</td>
+            <td class="column-title">Country</td>
+            <td class="column-title">Hotel</td>
+            <td class="column-title">Tour includes</td>
+            <td class="column-title">Day cost</td>
+            <td class="column-title">Number of orders</td>
+            <td colspan="2" class="column-title"></td>
+        </tr>
+        <tr>
+            <td>Golden sands</td>
+            <td>Italy</td>
+            <td>Salinia</td>
+            <td>Breakfasts, hotel, trip</td>
+            <td>85.00</td>
+            <td>2</td>
+            <td><a href=""><img src="icons/edit.png" alt="delete" class="edit-icon"></a></td>
+            <td><a href=""><img src="icons/delete.png" alt="delete" class="delete-icon"></a></td>
+        </tr>
+        <tr>
+            <td>Calm place</td>
+            <td>Switzerland</td>
+            <td>Iternational</td>
+            <td>Breakfasts, hotel, trip</td>
+            <td>149.00</td>
+            <td>3</td>
+            <td><a href=""><img src="icons/edit.png" alt="delete" class="edit-icon"></a></td>
+            <td><a href=""><img src="icons/delete.png" alt="delete" class="delete-icon"></a></td>
+        </tr>        
+    </table>
+</body>
+</html>

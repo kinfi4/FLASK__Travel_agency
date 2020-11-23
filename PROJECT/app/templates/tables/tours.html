@@ -1,0 +1,47 @@
+{% extends 'base_table.html' %}
+
+{% block sortform %}
+    <td colspan="8">
+        <form action="POST" class="datetime-form">
+            <label for="rentalcost-from">Rental cost from: </label>
+            <input type="number" id="rentalcost-from" class="numeric-input">
+
+            <label for="rentalcost-by" class="right-label">Rental cost from by: </label>
+            <input type="number" id="rentalcost-by" class="numeric-input">
+
+            <input type="submit" class="submit-button" value="">
+        </form>
+    </td>
+{% endblock sortform %}
+
+
+{% block links %}
+    <td class="table-block"><a href="{{ url_for('get_all_orders') }}">Orders</a></td>
+    <td class="table-block"><a href="{{ url_for('get_all_clients') }}">Clients</a></td>
+    <td class="chosen-table-block"><a href="{{ url_for('get_all_tours') }}">Tours</a></td>
+{% endblock links %}
+
+{% block content %}
+   <tr>
+        <td class="column-title">Tour name</td>
+        <td class="column-title">Country</td>
+        <td class="column-title">Hotel</td>
+        <td class="column-title">Tour includes</td>
+        <td class="column-title">Day cost</td>
+        <td class="column-title">Number of orders</td>
+        <td colspan="2" class="column-title"></td>
+    </tr>
+
+    {% for tour in tours %}
+        <tr>
+            <td>{{ tour.name }}</td>
+            <td>{{ tour.country }}</td>
+            <td>{{ tour.hotel }}</td>
+            <td>{{ tour.tour_includes }}</td>
+            <td>{{ tour.number_of_orders }}</td>
+            <td>{{ url_for('static', 'icons/edit.png') }}</td>
+            <td>{{ url_for('static', 'icons/delete.png') }}</td>
+        </tr>
+    {% endfor %}
+
+{% endblock content %}

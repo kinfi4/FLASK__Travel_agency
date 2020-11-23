@@ -1,0 +1,30 @@
+{% extends 'add_edit_form.html' %}
+
+{% block content %}
+     <tr>
+        <td colspan="5" class="edit-form-block">
+            {{ form.first_name.label(class="labels") }}:
+            {{ form.first_name() }}
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" class="edit-form-block">
+            {{ form.second_name.label(class="labels") }}:
+            {{ form.second_name() }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" class="edit-form-block">
+            {{ form.passport.label(class="labels") }}:
+            {{ form.passport() }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" class="edit-form-block">
+            {{ form.register_date.label(class="labels") }}:
+            {{ form.register_date(type="date") }}
+        </td>
+    </tr>
+
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% extends 'base_table.html' %}
+
+ {% block sortform %}
+    <td colspan="8">
+        <form action="POST" class="datetime-form">
+            <label for="datefrom">Date from: </label>
+            <input type="date" id="datefrom">
+
+            <label for="by" class="right-label">By: </label>
+            <input type="date" id="by">
+
+            <input type="submit" class="submit-button" value="">
+        </form>
+    </td>
+{% endblock sortform %}
+
+{% block links %}
+    <td class="table-block"><a href="{{ url_for('get_all_orders') }}">Orders</a></td>
+    <td class="chosen-table-block"><a href="{{ url_for('get_all_clients') }}">Clients</a></td>
+    <td class="table-block"><a href="{{ url_for('get_all_tours') }}">Tours</a></td>
+{% endblock links %}
+
+{% block content %}
+    <tr>
+        <td class="column-title">First name</td>
+        <td class="column-title">Last name</td>
+        <td class="column-title" colspan="2">Registration date</td>
+        <td class="column-title" colspan="2">Number of orders</td>
+        <td colspan="2" class="column-title"></td>
+    </tr>
+
+    {% for client in clients %}
+        <tr>
+            <td>{{ client.first_name }}</td>
+            <td>{{ client.second_name }}</td>
+            <td>{{ client.registration_date }}</td>
+            <td>{{ client.number_of_orders }}</td>
+            <td>{{ url_for('static', 'icons/edit.png') }}</td>
+            <td>{{ url_for('static', 'icons/delete.png') }}</td>
+        </tr>
+    {% endfor %}
+
+{% endblock content %}

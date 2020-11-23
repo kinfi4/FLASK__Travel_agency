@@ -3,85 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
 
-    <style>
-
-        td{
-            background-color: aqua;
-        }
-
-        table, th, td {
-            border: 1px solid black;
-        }
-        table{
-            width: 80%;
-            margin: auto;
-        }
-
-        td{
-            text-align: center;
-        }
-        
-        tr{
-            height: 40px;
-
-        }
-
-    </style>
 </head>
 <body>
     <table class="main-table">
-        <thead><td colspan="8">Orders</td></thead>
+        <thead><td colspan="8" class="table-title"><b>ORDERS</b></td></thead>
 
         <tr>
-            <td><a href="#">Orders</a></td>
-            <td><a href="#">Clients</a></td>
-            <td><a href="#">Cars</a></td>
-            <td colspan="5"><button>Add</button></td>
+            <td class="chosen-table-block"><a href="">Orders</a></td>
+            <td class="table-block"><a href="clients.html">Clients</a></td>
+            <td class="table-block"><a href="tours.html">Tours</a></td>
+            <td colspan="5"><a href="order.html"><button class="add-button">Add</button></a> </td>
         </tr>
+
 
         <tr>
             <td colspan="8">
-                <form action="POST">
+                <form action="POST" class="datetime-form">
                     <label for="datefrom">Date from: </label>
                     <input type="date" id="datefrom">
                     
-                    <label for="by">By: </label>
+                    <label for="by" class="right-label">By: </label>
                     <input type="date" id="by">
                     
-                    <input type="submit" class="submit_button" value="">
+                    <input type="submit" class="submit-button" value="">
                 </form>
             </td>
         </tr>
         <tr>
-            <td>Car number</td>
-            <td>Client password number</td>
-            <td>Add date</td>
-            <td>Rental Time</td>
-            <td>Car rental cost</td>
-            <td>Total cost</td>
-            <td colspan="2"></td>
+            <td class="column-title">Tour number</td>
+            <td class="column-title">Client password number</td>
+            <td class="column-title">Add date</td>
+            <td class="column-title">Days</td>
+            <td class="column-title">Tour day cost</td>
+            <td class="column-title">Total cost</td>
+            <td colspan="2" class="column-title"></td>
         </tr>
         <tr>
-            <td>412</td>
-            <td>ab241</td>
-            <td>02.03.2018</td>
-            <td>2</td>
-            <td>85.00</td>
-            <td>170.00</td>
-            <td>badge</td>
-            <td>badge</td>
+            <td class="background-0">412</td>
+            <td class="background-0">ab241</td>
+            <td class="background-0">02.03.2018</td>
+            <td class="background-0">2</td>
+            <td class="background-0">85.00</td>
+            <td class="background-0">170.00</td>
+            <td class="background-0"><a href=""><img src="icons/edit.png" alt="delete" class="edit-icon"></a></td>
+            <td class="background-0"><a href=""><img src="icons/delete.png" alt="delete" class="delete-icon"></a></td>
         </tr>
         <tr>
-            <td>542</td>
-            <td>ab4123</td>
-            <td>12.03.2018</td>
-            <td>3</td>
-            <td>77.00</td>
-            <td>231.00</td>
-            <td>badge</td>
-            <td>badge</td>
+            <td class="background-1">542</td>
+            <td class="background-1">ab4123</td>
+            <td class="background-1">12.03.2018</td>
+            <td class="background-1">3</td>
+            <td class="background-1">77.00</td>
+            <td class="background-1">231.00</td>
+            <td class="background-1"><a href=""><img src="icons/edit.png" alt="delete" class="edit-icon"></a></td>
+            <td class="background-1"><a href=""><img src="icons/delete.png" alt="delete" class="delete-icon"></a></td>
         </tr>        
     </table>
+
 </body>
 </html>

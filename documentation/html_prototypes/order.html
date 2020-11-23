@@ -3,10 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/edit-item_styles.css">
+
 </head>
+
 <body>
-    <table>
-        <thead></thead>
+    <table class="edit-table">
+        <thead><td colspan="8" class="table-title"><b>ADD ORDER</b></td></thead>
+
+        <form action="" method="POST">
+            <tr class="main-row">    
+                <td class="chosen-table-block"><a href="">Orders</a></td>
+                <td class="table-block"><a href="clients.html">Clients</a></td>
+                <td class="table-block"><a href="tours.html">Tours</a></td>
+                
+                <td colspan="2">
+                    <a href="orders.html"><button class="cancel-button">Cancel</button></a>
+                    <input type="submit" class="add-button" value="Save">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="name" class="labels">Client name: </label>
+                    <select name="name" id="name">
+                        <option value="">Illia Makarov</option>
+                        <option value="">Alexandr Petrov</option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="name" class="labels">Tour name: </label>
+                    <select name="name" id="name">
+                        <option value="">Golden beach</option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="days" class="labels">Days: </label>
+                    <input type="number" min="0" max="100" value="7">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="edit-form-block">
+                    <label for="adddate" class="labels">Add date: </label>
+                    <input type="date">
+                </td>
+            </tr>
+    
+        </form>
+     
     </table>
+
 </body>
 </html>

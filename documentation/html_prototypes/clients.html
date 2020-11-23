@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <table class="main-table">
+        <thead><td colspan="8" class="table-title"><b>CLIENTS</b></td></thead>
+
+        <tr>
+            <td class="table-block"><a href="orders.html">Orders</a></td>
+            <td class="chosen-table-block"><a href="">Clients</a></td>
+            <td class="table-block"><a href="tours.html">Tours</a></td>
+            <td colspan="5"><a href="client.html"><button class="add-button">Add</button></a> </td>
+        </tr>
+
+        <!-- Form  -->
+        <tr>
+            <td colspan="8">
+                <form action="POST" class="datetime-form">
+                    <label for="datefrom">Date from: </label>
+                    <input type="date" id="datefrom">
+                    
+                    <label for="by" class="right-label">By: </label>
+                    <input type="date" id="by">
+                    
+                    <input type="submit" class="submit-button" value="">
+                </form>
+            </td>
+        </tr>
+        <!-- EndForm -->
+
+        <!-- ColumNames -->
+        <tr>
+            <td class="column-title">First name</td>
+            <td class="column-title">Last name</td>
+            <td class="column-title" colspan="2">Registration date</td>
+            <td class="column-title" colspan="2">Number of orders</td>
+            <td colspan="2" class="column-title"></td>
+        </tr>
+        <!-- EndColumNames -->
+
+        <!-- Content -->
+        <tr>
+            <td class="background-0">Ilia</td>
+            <td class="background-0">Makarov</td>
+            <td class="background-0" colspan="2">02.03.2018</td>
+            <td class="background-0" colspan="2">2</td>
+            <td class="background-0"><a href=""><img src="icons/edit.png" alt="delete" class="edit-icon"></a></td>
+            <td class="background-0"><a href=""><img src="icons/delete.png" alt="delete" class="delete-icon"></a></td>
+        </tr>
+        <tr>
+            <td class="background-1">Imanuil</td>
+            <td class="background-1">Kant</td>
+            <td class="background-1" colspan="2">12.03.2018</td>
+            <td class="background-1" colspan="2">3</td>
+            <td class="background-1"><a href=""><img src="icons/edit.png" alt="delete" class="edit-icon"></a></td>
+            <td class="background-1"><a href=""><img src="icons/delete.png" alt="delete" class="delete-icon"></a></td>
+        </tr>       
+        <tr>
+            <td class="background-0">Artem</td>
+            <td class="background-0">Vingit</td>
+            <td class="background-0" colspan="2">17.10.2018</td>
+            <td class="background-0" colspan="2">2</td>
+            <td class="background-0"><a href=""><img src="icons/edit.png" alt="delete" class="edit-icon"></a></td>
+            <td class="background-0"><a href=""><img src="icons/delete.png" alt="delete" class="delete-icon"></a></td>
+        </tr>    
+        <!-- EndContent -->
+    </table>
+</body>
+</html>

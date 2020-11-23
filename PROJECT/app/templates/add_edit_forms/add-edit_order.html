@@ -1,0 +1,30 @@
+{% extends 'add_edit_form.html' %}
+
+{% block content %}
+     <tr>
+        <td colspan="5" class="edit-form-block">
+            {{ form.client_name.label(class="labels") }}:
+            {{ form.client_name() }}
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" class="edit-form-block">
+            {{ form.tour_name.label(class="labels") }}:
+            {{ form.tour_name() }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" class="edit-form-block">
+            {{ form.days.label(class="labels") }}:
+            {{ form.days() }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" class="edit-form-block">
+            {{ form.add_date.label(class="labels") }}:
+            {{ form.add_date(type="date") }}
+        </td>
+    </tr>
+
+{% endblock content %}
