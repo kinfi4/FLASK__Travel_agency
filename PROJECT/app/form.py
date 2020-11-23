@@ -8,6 +8,7 @@ from datetime import date
 class AddEditTourForm(FlaskForm):
     tour_name = StringField('Tour name', validators=[DataRequired()])
     hotel_name = StringField('Hotel name', validators=[DataRequired()])
+    country = StringField('Country', validators=[DataRequired()])
     tour_includes = StringField('Tour includes', validators=[DataRequired()])
     day_cost = FloatField('Day cost', validators=[DataRequired()])
     submit = SubmitField('')
@@ -22,8 +23,8 @@ class AddEditClientForm(FlaskForm):
 
 
 class AddEditOrderForm(FlaskForm):
-    client_name = SelectField('Client name', validators=[DataRequired()])
-    tour_name = SelectField('Tour name', validators=[DataRequired()])
+    client_pass = SelectField('Client pass', validators=[DataRequired()])
+    tour_id = SelectField('Tour id', validators=[DataRequired()])
     days = IntegerField('Days', validators=[DataRequired()], default=7)
     add_date = DateField('Add date', validators=[DataRequired()], default=date.today())
     submit = SubmitField('')

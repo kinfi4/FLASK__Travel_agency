@@ -26,7 +26,7 @@ class Tour(db.Model):
 
     @property
     def number_of_orders(self):
-        return len(Order.query.filter(tour_id=self.id))
+        return len(list(Order.query.filter(Order.tour_id == self.id)))
 
     def __repr__(self):
         return f'Tour: {self.name}'
@@ -38,6 +38,16 @@ class Order(db.Model):
     client_pass = db.Column(db.String(80), db.ForeignKey('client.passport'))
     add_date = db.Column(db.Date, index=True, default=date.today())
     days = db.Column(db.Integer)
+
+    @property
+    def client_name(self):
+        client = Client.query.filter(Client.passport == self.client_pass).first()
+        return f'{client.first_name} {client.last_name}'
+
+    @property
+    def tour_name(self):
+        tour = Tour.query.filter(Tour.id == self.tour_id).first()
+        return f'{tour.name}'
 
     @property
     def tour_day_cost(self):

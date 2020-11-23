@@ -23,8 +23,8 @@
 
 {% block content %}
     <tr>
-        <td class="column-title">Tour number</td>
-        <td class="column-title">Client password number</td>
+        <td class="column-title">Tour name</td>
+        <td class="column-title">Client name</td>
         <td class="column-title">Add date</td>
         <td class="column-title">Days</td>
         <td class="column-title">Tour day cost</td>
@@ -34,8 +34,8 @@
 
     {% for order in orders %}
         <tr>
-            <td>{{ order.id }}</td>
-            <td>{{ order.client_pass }}</td>
+            <td>{{ order.tour_name }}</td>
+            <td>{{ order.client_name }}</td>
             <td>{{ order.add_date }}</td>
             <td>{{ order.days }}</td>
             <td>{{ order.tour_day_cost }}</td>

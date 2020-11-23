@@ -7,7 +7,7 @@
 
 </head>
 <body>
-    <table class="main-table">
+    <table class="upper-table">
         <thead><td colspan="8" class="table-title"><b>{{ title.upper() }}</b></td></thead>
 
         <tr>
@@ -16,8 +16,9 @@
 
             <td colspan="5"><a href="{{ url_for(add_button) }}"><button class="add-button">Add</button></a> </td>
         </tr>
+    </table>
 
-
+    <table class="lower-table">
         <tr>
             {% block sortform %}
 

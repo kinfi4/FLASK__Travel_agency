@@ -15,6 +15,13 @@
 
         </td>
     </tr>
+     <tr>
+        <td colspan="5" class="edit-form-block">
+            {{ form.country.label(class="labels") }}:
+            {{ form.country() }}
+
+        </td>
+    </tr>
     <tr>
         <td colspan="5" class="edit-form-block">
             {{ form.hotel_name.label(class="labels") }}:
@@ -30,7 +37,7 @@
     <tr>
         <td colspan="5" class="edit-form-block">
             {{ form.day_cost.label(class="labels") }}:
-            {{ form.day_cost(type="date") }}
+            {{ form.day_cost(type="number", min="1")}}
         </td>
     </tr>
 

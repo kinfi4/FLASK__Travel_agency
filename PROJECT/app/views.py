@@ -10,7 +10,7 @@ from app.models import Client, Order, Tour
 class GetAllOrdersView(MethodView):
     def get(self):
         return render_template('tables/orders.html', **self.prepare_context())
-    
+
     def prepare_context(self):
         title = 'Orders'
         add_button = 'add_order'
@@ -59,8 +59,38 @@ class AddOrderView(MethodView):
     def get(self):
         return render_template('add_edit_forms/add-edit_order.html', **self.prepare_context())
 
+    def post(self):
+        form = AddEditOrderForm()
+
+        print(form.client_pass.data.split()[0])
+        print(form.tour_id.data.split()[0])
+
+        # if form.validate_on_submit():
+        order = Order()
+
+        order.client_pass = form.client_pass.data.split()[0]
+        order.add_date = form.add_date.data
+        order.tour_id = form.tour_id.data.split()[0]
+        order.days = form.days.data
+
+        db.session.add(order)
+        db.session.commit()
+
+        return redirect(url_for('get_all_orders'))
+
     def prepare_context(self):
         form = AddEditOrderForm()
+
+        clients = Client.query.all()
+        form.client_pass.choices = list(
+            f'{client.passport} - ({client.first_name} {client.last_name})' for client in clients
+        )
+
+        tours = Tour.query.all()
+        form.tour_id.choices = list(
+            f'{tour.id} - {tour.name}' for tour in tours
+        )
+
         title = 'ADD ORDER'
         submit_url = '/add-order'
 
@@ -79,13 +109,15 @@ class AddClientView(MethodView):
         form = AddEditClientForm()
 
         client = Client()
-        client.first_name = form.first_name.data
-        client.last_name = form.second_name.data
-        client.passport = form.passport.data
-        client.registration_date = form.register_date.data
 
-        db.session.add(client)
-        db.session.commit()
+        if form.validate_on_submit():
+            client.first_name = form.first_name.data
+            client.last_name = form.second_name.data
+            client.passport = form.passport.data
+            client.registration_date = form.register_date.data
+
+            db.session.add(client)
+            db.session.commit()
 
         return redirect(url_for('get_all_clients'))
 
@@ -107,6 +139,19 @@ class AddTourView(MethodView):
 
     def post(self):
         form = AddEditTourForm()
+
+        if form.validate_on_submit():
+            tour = Tour()
+            tour.hotel = form.hotel_name.data
+            tour.name = form.tour_name.data
+            tour.day_cost = form.day_cost.data
+            tour.tour_includes = form.tour_includes.data
+            tour.country = form.country.data
+
+            db.session.add(tour)
+            db.session.commit()
+
+            return redirect(url_for('get_all_tours'))
 
     def prepare_context(self):
         form = AddEditTourForm()
