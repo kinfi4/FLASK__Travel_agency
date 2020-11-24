@@ -35,8 +35,12 @@
             <td>{{ client.last_name }}</td>
             <td colspan="2">{{ client.registration_date }}</td>
             <td colspan="2">{{ client.number_of_orders }}</td>
-            <td><img src="{{ url_for('static', filename='icons/edit.png') }}" alt="edit" class="edit-icon"></td>
-            <td><img src="{{ url_for('static', filename='icons/delete.png') }}" alt="delete" class="delete-icon"></td>
+            <td><a href="{{ url_for('edit_client', passport=client.passport) }}"><img src="{{ url_for('static', filename='icons/edit.png') }}" alt="edit" class="edit-icon"></a></td>
+            <td>
+                <form action="{{ url_for('delete_client', passport=client.passport) }}" method="post">
+                    <input type="submit" class="delete-button delete-icon" value="">
+                </form>
+            </td>
         </tr>
     {% endfor %}
 

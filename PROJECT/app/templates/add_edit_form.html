@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>{{ title }}</title>
 
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/edit-item_styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit-item_styles.css') }}">
 
 </head>
 
@@ -23,7 +23,7 @@
                 {% endblock links %}
 
                 <td colspan="2">
-                    <a href="orders.html"><button class="cancel-button">Cancel</button></a>
+                    <a href="{{ url_for(cancel_button) }}"><div class="cancel-button"><p>Cancel</p></div></a>
                     <input type="submit" class="add-button" value="Save">
                 </td>
             </tr>

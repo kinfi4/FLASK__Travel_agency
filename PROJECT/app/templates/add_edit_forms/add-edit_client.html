@@ -12,24 +12,40 @@
             {{ form.first_name.label(class="labels") }}:
             {{ form.first_name() }}
 
+            {% for error in form.first_name.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+
         </td>
     </tr>
     <tr>
         <td colspan="5" class="edit-form-block">
             {{ form.second_name.label(class="labels") }}:
             {{ form.second_name() }}
+
+            {% for error in form.second_name.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
         </td>
     </tr>
     <tr>
         <td colspan="5" class="edit-form-block">
             {{ form.passport.label(class="labels") }}:
             {{ form.passport() }}
+
+            {% for error in form.passport.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
         </td>
     </tr>
     <tr>
         <td colspan="5" class="edit-form-block">
             {{ form.register_date.label(class="labels") }}:
             {{ form.register_date(type="date") }}
+
+            {% for error in form.register_date.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
         </td>
     </tr>
 

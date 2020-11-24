@@ -115,3 +115,26 @@ a{
     margin-left: 20px;
 }
 
+.edit-button{
+    border: none;
+    background: url('../icons/edit.png') no-repeat top left;
+    width: 35px;
+    background-size: 35px 35px;
+    height: 35px;
+    margin-left: 10px;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+
+.delete-button{
+    border: none;
+    background: url('../icons/delete.png') no-repeat top left;
+    width: 35px;
+    background-size: 35px 35px;
+    height: 35px;
+    margin-left: 10px;
+    vertical-align: bottom;
+    cursor: pointer;
+
+}
+

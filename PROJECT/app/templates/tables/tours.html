@@ -38,9 +38,14 @@
             <td>{{ tour.country }}</td>
             <td>{{ tour.hotel }}</td>
             <td>{{ tour.tour_includes }}</td>
+            <td>{{ tour.day_cost }}</td>
             <td>{{ tour.number_of_orders }}</td>
-            <td><img src="{{ url_for('static', filename='icons/edit.png') }}" alt="edit" class="edit-icon"></td>
-            <td><img src="{{ url_for('static', filename='icons/delete.png') }}" alt="delete" class="delete-icon"></td>
+            <td><a href="{{ url_for('edit_tour', id=tour.id) }}"><img src="{{ url_for('static', filename='icons/edit.png') }}" alt="edit" class="edit-icon"></a></td>
+            <td>
+                <form action="{{ url_for('delete_tour', id=tour.id) }}" method="post">
+                    <input type="submit" class="delete-button delete-icon" value="">
+                </form>
+            </td>
         </tr>
     {% endfor %}
 

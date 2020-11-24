@@ -9,8 +9,14 @@
     float: right;
     margin-right: 30px;
     border: 0.6px solid black;
+    display:table;
 
     transition: all 0.5s linear;
+}
+
+.cancel-button p{
+    display:table-cell;
+    vertical-align: middle;
 }
 
 .cancel-button:hover{
