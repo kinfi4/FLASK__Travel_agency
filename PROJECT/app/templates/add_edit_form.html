@@ -17,6 +17,7 @@
 
         <form action="{{ submit_url }}" method="POST">
             {{ form.hidden_tag() }}
+            {{ form.csrf_token }}
 
             <tr class="main-row">
                 {% block links %}

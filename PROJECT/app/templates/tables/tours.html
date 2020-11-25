@@ -2,12 +2,12 @@
 
 {% block sortform %}
     <td colspan="8">
-        <form action="POST" class="datetime-form">
+        <form action="{{ url_for('get_all_tours') }}" class="datetime-form">
             <label for="rentalcost-from">Rental cost from: </label>
-            <input type="number" id="rentalcost-from" class="numeric-input" min="1">
+            <input type="number" id="rentalcost-from" class="numeric-input" min="1" name="from_price" value="{{ from_price }}">
 
             <label for="rentalcost-by" class="right-label">Rental cost from by: </label>
-            <input type="number" id="rentalcost-by" class="numeric-input">
+            <input type="number" id="rentalcost-by" class="numeric-input" name="by_price" value="{{ by_price }}">
 
             <input type="submit" class="submit-button" value="">
         </form>

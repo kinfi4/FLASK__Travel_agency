@@ -1,58 +1,135 @@
+from datetime import date
+
 from flask import render_template, redirect, request, url_for
 from flask.views import MethodView
+from sqlalchemy import func
 
 from app import app, db
 from app.form import AddEditOrderForm, AddEditClientForm, AddEditTourForm
-
 from app.models import Client, Order, Tour
 
 
+# Get All Entities
 class GetAllOrdersView(MethodView):
     def get(self):
-        return render_template('tables/orders.html', **self.prepare_context())
+        return render_template('tables/orders.html', **self.prepare_context(request.args))
 
-    def prepare_context(self):
+    def prepare_context(self, filters=None):
         title = 'Orders'
         add_button = 'add_order'
-        orders = Order.query.all()
+
+        if filters:
+            s_from_date = filters['add_date_from']
+            s_by_date = filters['add_date_by']
+
+            if s_from_date and s_by_date:
+                from_date = date.fromisoformat(s_from_date)
+                by_date = date.fromisoformat(s_by_date)
+
+                by_date.replace(by_date.year, by_date.month, by_date.day + 1)
+                from_date.replace(from_date.year, from_date.month, from_date.day - 1)
+
+                orders = Order.query.filter(Order.add_date > from_date).filter(by_date > Order.add_date)
+            elif s_from_date:
+                from_date = date.fromisoformat(s_from_date)
+                from_date.replace(from_date.year, from_date.month, from_date.day - 1)
+
+                orders = Order.query.filter(Order.add_date >= from_date)
+            elif s_by_date:
+                by_date = date.fromisoformat(s_by_date)
+                by_date.replace(by_date.year, by_date.month, by_date.day + 1)
+
+                orders = Order.query.filter(by_date >= Order.add_date)
+            else:
+                orders = Order.query.all()
+        else:
+            orders = Order.query.all()
 
         return {
             'title': title,
             'add_button': add_button,
-            'orders': orders
+            'orders': orders,
+            'sort_from': filters.get('add_date_from', None),
+            'sort_by': filters.get('add_date_by', None)
         }
 
 
 class GetAllClientsView(MethodView):
     def get(self):
-        return render_template('tables/clients.html', **self.prepare_context())
+        return render_template('tables/clients.html', **self.prepare_context(request.args))
 
-    def prepare_context(self):
+    def prepare_context(self, filters=None):
         title = 'Clients'
         add_button = 'add_client'
-        clients = Client.query.all()
+
+        if filters:
+            s_from_date = filters['add_date_from']
+            s_by_date = filters['add_date_by']
+
+            if s_from_date and s_by_date:
+                from_date = date.fromisoformat(s_from_date)
+                by_date = date.fromisoformat(s_by_date)
+
+                by_date.replace(by_date.year, by_date.month, by_date.day + 1)
+                from_date.replace(from_date.year, from_date.month, from_date.day - 1)
+
+                clients = Client.query.filter(Client.registration_date > from_date).filter(
+                    by_date > Client.registration_date)
+            elif s_from_date:
+                from_date = date.fromisoformat(s_from_date)
+                from_date.replace(from_date.year, from_date.month, from_date.day - 1)
+
+                clients = Client.query.filter(Client.registration_date >= from_date)
+            elif s_by_date:
+                by_date = date.fromisoformat(s_by_date)
+                by_date.replace(by_date.year, by_date.month, by_date.day + 1)
+
+                clients = Client.query.filter(by_date >= Client.registration_date)
+            else:
+                clients = Client.query.all()
+        else:
+            clients = Client.query.all()
 
         return {
             'title': title,
             'add_button': add_button,
-            'clients': clients
+            'clients': clients,
+            'sort_from': filters.get('add_date_from', None),
+            'sort_by': filters.get('add_date_by', None)
         }
 
 
 class GetAllToursView(MethodView):
     def get(self):
-        return render_template('tables/tours.html', **self.prepare_context())
+        return render_template('tables/tours.html', **self.prepare_context(request.args))
 
-    def prepare_context(self):
+    def prepare_context(self, filters=None):
         title = 'Tours'
         add_button = 'add_tour'
-        tours = Tour.query.all()
+
+        if filters:
+            from_price = float(filters['from_price'])
+            by_price = float(filters['by_price'])
+
+            if from_price and by_price:
+                tours = Tour.query.filter(Tour.day_cost > int(from_price)).filter(by_price > Tour.day_cost)
+            elif from_price:
+                tours = Tour.query.filter(Tour.day_cost >= from_price)
+            elif by_price:
+                tours = Tour.query.filter(by_price >= Tour.day_cost)
+            else:
+                tours = Tour.query.all()
+        else:
+            tours = Tour.query.all()
 
         return {
             'title': title,
             'add_button': add_button,
-            'tours': tours
+            'tours': tours,
+            'from_price': filters.get('from_price', None),
+            'by_price': filters.get('by_price', None)
         }
+# End Get All Entities
 
 
 # Add Views
@@ -66,16 +143,16 @@ class ControlOrderView(MethodView):
         print(form.client_pass.data.split()[0])
         print(form.tour_id.data.split()[0])
 
-        # if form.validate_on_submit():
-        order = Order()
+        if form.validate_on_submit():
+            order = Order()
 
-        order.client_pass = form.client_pass.data.split()[0]
-        order.add_date = form.add_date.data
-        order.tour_id = form.tour_id.data.split()[0]
-        order.days = form.days.data
+            order.client_pass = form.client_pass.data.split()[0]
+            order.add_date = form.add_date.data
+            order.tour_id = form.tour_id.data.split()[0]
+            order.days = form.days.data
 
-        db.session.add(order)
-        db.session.commit()
+            db.session.add(order)
+            db.session.commit()
 
         return redirect(url_for('get_all_orders'))
 
@@ -280,6 +357,10 @@ class EditOrderView(MethodView):
             return redirect(url_for('get_all_orders'))
 
         form = AddEditOrderForm()
+
+        print(form.validate_on_submit())
+        print(form.errors)
+
         if form.validate_on_submit():
             order.add_date = form.add_date.data
             order.tour_id = form.tour_id.data.split()[0]
@@ -288,7 +369,7 @@ class EditOrderView(MethodView):
 
             db.session.commit()
 
-        return redirect(url_for('get_all_tours'))
+        return redirect(url_for('get_all_orders'))
 
     def prepare_context(self, order):
         form = AddEditOrderForm()
@@ -299,7 +380,7 @@ class EditOrderView(MethodView):
                                    + list(
             f'{client.passport} - ({client.first_name} {client.last_name})' for client in clients if
             client != order_client
-            )
+        )
 
         tours = Tour.query.all()
         order_tour = Tour.query.get(order.tour_id)
@@ -366,9 +447,12 @@ class EditClientView(MethodView):
         }
 
 
-app.add_url_rule('/orders', view_func=GetAllOrdersView.as_view('get_all_orders'))
-app.add_url_rule('/clients', view_func=GetAllClientsView.as_view('get_all_clients'))
-app.add_url_rule('/tours', view_func=GetAllToursView.as_view('get_all_tours'))
+# End Edit Views
+
+
+app.add_url_rule('/orders', view_func=GetAllOrdersView.as_view('get_all_orders'), methods=['GET', 'POST'])
+app.add_url_rule('/clients', view_func=GetAllClientsView.as_view('get_all_clients'), methods=['GET', 'POST'])
+app.add_url_rule('/tours', view_func=GetAllToursView.as_view('get_all_tours'), methods=['GET', 'POST'])
 
 app.add_url_rule('/add-order', view_func=ControlOrderView.as_view('add_order'), methods=['GET', 'POST'])
 app.add_url_rule('/add-client', view_func=ControlClientView.as_view('add_client'), methods=['GET', 'POST'])
@@ -381,4 +465,5 @@ app.add_url_rule('/delete-tour/<int:id>', view_func=DeleteTourView.as_view('dele
 
 app.add_url_rule('/edit-tour/<int:id>', view_func=EditTourView.as_view('edit_tour'), methods=['POST', 'GET'])
 app.add_url_rule('/edit-order/<int:id>', view_func=EditOrderView.as_view('edit_order'), methods=['POST', 'GET'])
-app.add_url_rule('/edit-client/<string:passport>', view_func=EditClientView.as_view('edit_client'), methods=['POST', 'GET'])
+app.add_url_rule('/edit-client/<string:passport>', view_func=EditClientView.as_view('edit_client'),
+                 methods=['POST', 'GET'])

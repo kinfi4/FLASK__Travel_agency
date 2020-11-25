@@ -23,8 +23,8 @@ class AddEditClientForm(FlaskForm):
 
 
 class AddEditOrderForm(FlaskForm):
-    client_pass = SelectField('Client pass', validators=[DataRequired()])
-    tour_id = SelectField('Tour id', validators=[DataRequired()])
+    client_pass = SelectField('Client pass', validators=[DataRequired()], validate_choice=False)
+    tour_id = SelectField('Tour id', validators=[DataRequired()], validate_choice=False)
     days = IntegerField('Days', validators=[DataRequired()], default=7)
     add_date = DateField('Add date', validators=[DataRequired()], default=date.today())
     submit = SubmitField('')
