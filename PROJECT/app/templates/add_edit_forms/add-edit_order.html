@@ -9,42 +9,50 @@
 {% block content %}
      <tr>
         <td colspan="5" class="edit-form-block">
-            {{ form.client_pass.label(class="labels") }}:
+            <div class="field">
+            {{ form.client_pass.label(class="labels") }}
             {{ form.client_pass() }}
 
             {% for error in form.client_pass.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
+            </div>
         </td>
     </tr>
     <tr>
         <td colspan="5" class="edit-form-block">
-            {{ form.tour_id.label(class="labels") }}:
+            <div class="field">
+            {{ form.tour_id.label(class="labels") }}
             {{ form.tour_id() }}
 
             {% for error in form.tour_id.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
+            </div>
         </td>
     </tr>
     <tr>
         <td colspan="5" class="edit-form-block">
-            {{ form.days.label(class="labels") }}:
+            <div class="field">
+            {{ form.days.label(class="labels") }}
             {{ form.days() }}
 
             {% for error in form.days.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
+            </div>
         </td>
     </tr>
     <tr>
         <td colspan="5" class="edit-form-block">
-            {{ form.add_date.label(class="labels") }}:
-            {{ form.add_date(type="date") }}
+            <div class="field">
+            {{ form.tour_date.label(class="labels") }}
+            {{ form.tour_date(type="date") }}
 
-            {% for error in form.add_date.errors %}
+            {% for error in form.tour_date.errors %}
                 <span style="color: red;">{{ error }}</span>
             {% endfor %}
+            </div>
         </td>
     </tr>
 

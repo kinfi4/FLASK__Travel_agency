@@ -10,54 +10,62 @@
 {% block content %}
      <tr>
         <td colspan="5" class="edit-form-block">
-            {{ form.tour_name.label(class="labels") }}:
-            {{ form.tour_name() }}
+            <div class="field">
+                {{ form.tour_name.label(class="labels") }}
+                {{ form.tour_name() }}
 
-            {% for error in form.tour_name.errors %}
-                <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-
+                {% for error in form.tour_name.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
         </td>
     </tr>
      <tr>
+         <td colspan="5" class="edit-form-block">
+            <div class="field">
+                {{ form.country.label(class="labels") }}
+                {{ form.country() }}
+
+                {% for error in form.country.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
+         </td>
+    </tr>
+    <tr>
         <td colspan="5" class="edit-form-block">
-            {{ form.country.label(class="labels") }}:
-            {{ form.country() }}
+            <div class="field">
+                {{ form.hotel_name.label(class="labels") }}
+                {{ form.hotel_name() }}
 
-            {% for error in form.country.errors %}
-                <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-
+                {% for error in form.hotel_name.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
         </td>
     </tr>
     <tr>
         <td colspan="5" class="edit-form-block">
-            {{ form.hotel_name.label(class="labels") }}:
-            {{ form.hotel_name() }}
+            <div class="field">
+                {{ form.tour_includes.label(class="labels") }}
+                {{ form.tour_includes(type="text") }}
 
-            {% for error in form.hotel_name.errors %}
-                <span style="color: red;">{{ error }}</span>
-            {% endfor %}
+                {% for error in form.tour_includes.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
         </td>
     </tr>
     <tr>
         <td colspan="5" class="edit-form-block">
-            {{ form.tour_includes.label(class="labels") }}:
-            {{ form.tour_includes(type="text") }}
+            <div class="field">
+                {{ form.day_cost.label(class="labels") }}
+                {{ form.day_cost(type="number", min="1")}}
 
-            {% for error in form.tour_includes.errors %}
-                <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="5" class="edit-form-block">
-            {{ form.day_cost.label(class="labels") }}:
-            {{ form.day_cost(type="number", min="1")}}
-
-            {% for error in form.day_cost.errors %}
-                <span style="color: red;">{{ error }}</span>
-            {% endfor %}
+                {% for error in form.day_cost.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </div>
         </td>
     </tr>
 

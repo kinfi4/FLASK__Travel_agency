@@ -37,7 +37,7 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tour_id = db.Column(db.Integer, db.ForeignKey('tour.id'))
     client_pass = db.Column(db.String(80), db.ForeignKey('client.passport'))
-    add_date = db.Column(db.Date, index=True, default=date.today())
+    tour_date = db.Column(db.Date, index=True, default=date.today())
     days = db.Column(db.Integer)
 
     @property

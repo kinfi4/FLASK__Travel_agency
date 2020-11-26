@@ -19,8 +19,8 @@ class GetAllOrdersView(MethodView):
         add_button = 'add_order'
 
         if filters:
-            s_from_date = filters['add_date_from']
-            s_by_date = filters['add_date_by']
+            s_from_date = filters['tour_date_from']
+            s_by_date = filters['tour_date_by']
 
             if s_from_date and s_by_date:
                 from_date = date.fromisoformat(s_from_date)
@@ -29,17 +29,17 @@ class GetAllOrdersView(MethodView):
                 by_date.replace(by_date.year, by_date.month, by_date.day + 1)
                 from_date.replace(from_date.year, from_date.month, from_date.day - 1)
 
-                orders = Order.query.filter(Order.add_date > from_date).filter(by_date > Order.add_date)
+                orders = Order.query.filter(Order.tour_date > from_date).filter(by_date > Order.tour_date)
             elif s_from_date:
                 from_date = date.fromisoformat(s_from_date)
                 from_date.replace(from_date.year, from_date.month, from_date.day - 1)
 
-                orders = Order.query.filter(Order.add_date >= from_date)
+                orders = Order.query.filter(Order.tour_date >= from_date)
             elif s_by_date:
                 by_date = date.fromisoformat(s_by_date)
                 by_date.replace(by_date.year, by_date.month, by_date.day + 1)
 
-                orders = Order.query.filter(by_date >= Order.add_date)
+                orders = Order.query.filter(by_date >= Order.tour_date)
             else:
                 orders = Order.query.all()
         else:
@@ -49,8 +49,8 @@ class GetAllOrdersView(MethodView):
             'title': title,
             'add_button': add_button,
             'orders': orders,
-            'sort_from': filters.get('add_date_from', None),
-            'sort_by': filters.get('add_date_by', None)
+            'sort_from': filters.get('tour_date_from', None),
+            'sort_by': filters.get('tour_date_by', None)
         }
 
 
@@ -63,8 +63,8 @@ class GetAllClientsView(MethodView):
         add_button = 'add_client'
 
         if filters:
-            s_from_date = filters['add_date_from']
-            s_by_date = filters['add_date_by']
+            s_from_date = filters['tour_date_from']
+            s_by_date = filters['tour_date_by']
 
             if s_from_date and s_by_date:
                 from_date = date.fromisoformat(s_from_date)
@@ -94,8 +94,8 @@ class GetAllClientsView(MethodView):
             'title': title,
             'add_button': add_button,
             'clients': clients,
-            'sort_from': filters.get('add_date_from', None),
-            'sort_by': filters.get('add_date_by', None)
+            'sort_from': filters.get('tour_date_from', None),
+            'sort_by': filters.get('tour_date_by', None)
         }
 
 
@@ -147,7 +147,7 @@ class ControlOrderView(MethodView):
             order = Order()
 
             order.client_pass = form.client_pass.data.split()[0]
-            order.add_date = form.add_date.data
+            order.tour_date = form.tour_date.data
             order.tour_id = form.tour_id.data.split()[0]
             order.days = form.days.data
 
@@ -363,7 +363,7 @@ class EditOrderView(MethodView):
         print(form.errors)
 
         if form.validate_on_submit():
-            order.add_date = form.add_date.data
+            order.tour_date = form.tour_date.data
             order.tour_id = form.tour_id.data.split()[0]
             order.client_pass = form.client_pass.data.split()[0]
             order.days = form.days.data
@@ -390,7 +390,7 @@ class EditOrderView(MethodView):
         )
 
         form.days.data = order.days
-        form.add_date.data = order.add_date
+        form.tour_date.data = order.tour_date
 
         submit_url = '/edit-order/' + str(order.id)
         cancel_button = 'get_all_orders'

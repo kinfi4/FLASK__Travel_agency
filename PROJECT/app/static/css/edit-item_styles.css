@@ -54,3 +54,13 @@
 input, select{
     font-size: 15px;
 }
+
+div.field {
+  padding-bottom: 5px;
+}
+div.field label {
+  display: block;
+  float: left;
+  width: 130px;
+  height: 15px;
+}
