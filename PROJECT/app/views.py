@@ -193,6 +193,7 @@ class ControlClientView(MethodView):
             client.first_name = form.first_name.data
             client.last_name = form.second_name.data
             client.passport = form.passport.data
+            client.email = form.email.data
             client.registration_date = form.register_date.data
 
             db.session.add(client)
@@ -423,6 +424,7 @@ class EditClientView(MethodView):
             client.last_name = form.second_name.data
             client.passport = form.passport.data
             client.registration_date = form.register_date.data
+            client.email = form.email.data
 
             db.session.commit()
 
@@ -435,6 +437,7 @@ class EditClientView(MethodView):
         form.second_name.data = client.last_name
         form.passport.data = client.passport
         form.register_date.data = client.registration_date
+        form.email.data = client.email
 
         submit_url = '/edit-client/' + str(client.passport)
         cancel_button = 'get_all_clients'

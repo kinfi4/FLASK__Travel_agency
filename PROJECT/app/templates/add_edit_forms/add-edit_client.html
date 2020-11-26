@@ -30,6 +30,16 @@
     </tr>
     <tr>
         <td colspan="5" class="edit-form-block">
+            {{ form.email.label(class="labels") }}:
+            {{ form.email() }}
+
+            {% for error in form.email.errors %}
+                <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5" class="edit-form-block">
             {{ form.passport.label(class="labels") }}:
             {{ form.passport() }}
 

@@ -1,4 +1,5 @@
 from wtforms import StringField, FloatField, DateField, SelectField, IntegerField, SubmitField
+from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired
 from flask_wtf import FlaskForm
 
@@ -19,6 +20,7 @@ class AddEditClientForm(FlaskForm):
     second_name = StringField('Second name', validators=[DataRequired()])
     passport = StringField('Passport', validators=[DataRequired()])
     register_date = DateField('Register date', validators=[DataRequired()], default=date.today())
+    email = EmailField('Email', validators=[DataRequired()])
     submit = SubmitField('')
 
 

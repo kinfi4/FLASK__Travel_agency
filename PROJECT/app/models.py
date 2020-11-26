@@ -5,6 +5,7 @@ from app import db
 class Client(db.Model):
     passport = db.Column(db.String(15), primary_key=True)
     first_name = db.Column(db.String(99))
+    email = db.Column(db.String(50))
     last_name = db.Column(db.String(99))
     registration_date = db.Column(db.Date, default=date.today())
 
