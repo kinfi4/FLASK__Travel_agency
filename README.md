@@ -1,12 +1,12 @@
-#Travel agancy admin panel using Flask
-##1. Introduction
+# Travel agancy admin panel using Flask
+## 1. Introduction
 Today, the travel business is a huge industry. More than 150 million people buy at least one tour a year.
 My project is a very convenient travel agancy management system. Which will be used by the administration of the service to easily manage the database of their company.
 
-###1.1 Purpose
+### 1.1 Purpose
 The system provides an interface for managing orders, tours and clients. Makes it easy to add delete or edit existing instances.
 
-###1.2 Application provides:
+### 1.2 Application provides:
     - Orders managing
         - Add new order
         - Delete order
