@@ -96,6 +96,8 @@ a{
     margin-left: 10px;
     vertical-align: bottom;
     cursor: pointer;
+    margin-bottom: 8px;
+    margin-top: 5px;
 
 }
 
@@ -135,6 +137,15 @@ a{
     margin-left: 10px;
     vertical-align: bottom;
     cursor: pointer;
+}
 
+.sort-input{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.formblock{
+    display: inline-block;
+    margin-bottom: 10px;
 }
 

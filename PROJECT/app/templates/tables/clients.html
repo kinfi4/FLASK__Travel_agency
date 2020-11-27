@@ -1,15 +1,23 @@
 {% extends 'base_table.html' %}
 
  {% block sortform %}
-    <td colspan="8">
+    <td colspan="8" style="height: 60px;">
         <form action="{{ url_for('get_all_clients') }}" class="datetime-form">
-            <label for="datefrom">Date from: </label>
-            <input type="date" id="datefrom" name="add_date_from" value="{{ sort_from }}">
 
-            <label for="by" class="right-label">By: </label>
-            <input type="date" id="by" name="add_date_by" value="{{ sort_by }}">
+            <div class="formblock">
+                <label for="sort-input" class="sort-label">Sort by: </label>
+                <select name="sort-input" id="sort-input" class="sort-input">
+                    <option value="first_name">First name</option>
+                    <option value="last_name">Last name</option>
+                    <option value="num_orders">Number of orders</option>
+                </select>
+                <br>
+                <label for="desc">Descending</label>
+                <input type="checkbox" id="desc" name="desc" value="{{ desc }}">
 
-            <input type="submit" class="submit-button" value="">
+            </div>
+
+            <input type="submit" class="submit-button" value="" style="margin-bottom: 20px;">
         </form>
     </td>
 {% endblock sortform %}

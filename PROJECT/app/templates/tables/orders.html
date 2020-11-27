@@ -3,12 +3,13 @@
 {% block sortform %}
     <td colspan="8">
         <form action="{{ url_for('get_all_orders') }}" class="datetime-form">
+            <div class="formblock">
             <label for="datefrom">Date from: </label>
             <input type="date" id="datefrom" name="tour_date_from" value="{{ sort_from }}">
 
             <label for="by" class="right-label">By: </label>
             <input type="date" id="by" name="tour_date_by" value="{{ sort_by }}">
-
+            </div>
             <input type="submit" class="submit-button" value="">
         </form>
     </td>
