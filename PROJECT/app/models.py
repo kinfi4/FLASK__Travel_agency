@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from app import db
 
 
@@ -7,7 +7,7 @@ class Client(db.Model):
     first_name = db.Column(db.String(99))
     email = db.Column(db.String(50))
     last_name = db.Column(db.String(99))
-    registration_date = db.Column(db.Date, default=date.today())
+    registration_date = db.Column(db.DateTime, default=datetime.now())
 
     @property
     def number_of_orders(self):

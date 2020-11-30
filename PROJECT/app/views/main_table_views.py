@@ -112,8 +112,8 @@ class GetAllToursView(MethodView):
         add_button = 'add_tour'
 
         if filters:
-            from_price = float(filters['from_price'])
-            by_price = float(filters['by_price'])
+            from_price = float(filters['from_price']) - 1
+            by_price = float(filters['by_price']) + 1
 
             if from_price and by_price:
                 tours = Tour.query.filter(Tour.day_cost > int(from_price)).filter(by_price > Tour.day_cost)
