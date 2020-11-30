@@ -25,6 +25,23 @@ The system provides an interface for managing orders, tours and clients. Makes i
         - Delete tour
         - Edit existing tour
         - Sort tours by price
+        
+## 2 Instances of application
+
+### 2.1 Orders
+  The model which is used to control client`s orders, consists of:
+#####
+        - Tour name
+        - Client name
+        - Tour date: the date when tour starts
+        - Days: duration of the tour
+        - Tour day cost
+        - Tour total cost: full price that is equal day_cost * days
+  
+
+#### 2.1.1 Display all orders
+![Orders](documentation/screenshots/orders.png)
+
 
 ![Orders](documentation/screenshots/tours.png)
 
