@@ -66,8 +66,6 @@ class GetAllClientsView(MethodView):
             sort_by = filters['sort-input']
             desc = filters.get('desc', False)
 
-            # desc = True if desc == 'on' else False
-            print(desc, sort_by)
             if sort_by and desc:
                 if sort_by == 'first_name':
                     clients = list(Client.query.order_by(Client.first_name))

@@ -1,4 +1,7 @@
+from datetime import date
+
 from flask_restful import Resource, marshal_with
+from flask import request
 
 from app import api, db
 from app.models import Client, Order, Tour
@@ -14,8 +17,40 @@ class GetJsonClients(Resource):
             Modifies: nothing
             Returns: a query list of all the clients
         """
+        return self.prepare_context(request.args)
 
-        return Client.query.all()
+    @staticmethod
+    def prepare_context(filters=None):
+
+        if filters:
+            sort_by = filters.get('sort-input', False)
+            desc = filters.get('desc', False)
+
+            if sort_by == 'first_name':
+                if desc:
+                    clients = list(Client.query.order_by(Client.first_name))
+                    clients.reverse()
+                else:
+                    clients = Client.query.order_by(Client.first_name)
+            elif sort_by == 'last_name':
+                if desc:
+                    clients = list(Client.query.order_by(Client.last_name))
+                    clients.reverse()
+                else:
+                    clients = Client.query.order_by(Client.last_name)
+            elif sort_by == 'num_orders':
+                if desc:
+                    clients = list(Client.query.all())
+                    clients.sort(key=lambda c: c.number_of_orders, reverse=True)
+                else:
+                    clients = list(Client.query.all())
+                    clients.sort(key=lambda c: c.number_of_orders)
+            else:
+                clients = Client.query.all()
+        else:
+            clients = Client.query.all()
+
+        return list(clients)
 
     @marshal_with(resource_client_fields)
     def post(self):
@@ -49,7 +84,39 @@ class GetJsonOrders(Resource):
             Modifies: nothing
             Returns: query list of all the orders in database
         """
-        return Order.query.all()
+        return self.prepare_context(request.args)
+
+    @staticmethod
+    def prepare_context(filters=None):
+        if filters:
+            s_from_date = filters.get('tour_date_from', None)
+            s_by_date = filters.get('tour_date_by', None)
+
+            if s_from_date and s_by_date:
+                from_date = date.fromisoformat(s_from_date)
+                by_date = date.fromisoformat(s_by_date)
+
+                by_date.replace(by_date.year, by_date.month, by_date.day + 1)
+                from_date.replace(from_date.year, from_date.month, from_date.day - 1)
+
+                orders = Order.query.filter(Order.tour_date > from_date).filter(by_date > Order.tour_date)
+            elif s_from_date:
+                from_date = date.fromisoformat(s_from_date)
+                from_date.replace(from_date.year, from_date.month, from_date.day - 1)
+
+                orders = Order.query.filter(Order.tour_date >= from_date)
+            elif s_by_date:
+                by_date = date.fromisoformat(s_by_date)
+                by_date.replace(by_date.year, by_date.month, by_date.day + 1)
+
+                orders = Order.query.filter(by_date >= Order.tour_date)
+            else:
+                orders = Order.query.all()
+        else:
+            orders = Order.query.all()
+        print(list(orders))
+
+        return list(orders)
 
     @marshal_with(resource_order_fields)
     def post(self):
@@ -82,7 +149,27 @@ class GetJsonTours(Resource):
             Modifies: nothing
             Returns: a query list of all the tours in database
         """
-        return Tour.query.all()
+        return self.prepare_context(request.args)
+
+    @staticmethod
+    def prepare_context(filters=None):
+
+        if filters:
+            from_price = float(filters['from_price']) - 1
+            by_price = float(filters['by_price']) + 1
+
+            if from_price and by_price:
+                tours = Tour.query.filter(Tour.day_cost > int(from_price)).filter(by_price > Tour.day_cost)
+            elif from_price:
+                tours = Tour.query.filter(Tour.day_cost >= from_price)
+            elif by_price:
+                tours = Tour.query.filter(by_price >= Tour.day_cost)
+            else:
+                tours = Tour.query.all()
+        else:
+            tours = Tour.query.all()
+
+        return list(tours)
 
     @marshal_with(resource_tour_fields)
     def post(self):
