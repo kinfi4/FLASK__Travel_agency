@@ -13,7 +13,7 @@ class GetJsonClient(Resource):
         """
             Method which can be used to get specific client using his passport
 
-            Expects: clients passport
+            Expects: clients passport : str
             Modifies: nothing
             Returns: client
         """
@@ -25,6 +25,14 @@ class GetJsonClient(Resource):
 
     @marshal_with(resource_client_fields)
     def delete(self, passport):
+        """
+            Method which can be used to delete specific client using his passport
+
+            Expects: clients passport : str
+            Modifies: nothing
+            Returns: client
+        """
+
         client = Client.query.get(passport)
         if not client:
             abort(404)
@@ -36,6 +44,14 @@ class GetJsonClient(Resource):
 
     @marshal_with(resource_client_fields)
     def put(self, passport):
+        """
+            Method which can be used to edit specific client using his passport
+
+            Expects: clients passport : str
+            Modifies: nothing
+            Returns: client
+        """
+
         client = Client.query.get(passport)
         if not client:
             abort(404)
@@ -66,6 +82,14 @@ class GetJsonClient(Resource):
 class GetJsonOrder(Resource):
     @marshal_with(resource_order_fields)
     def get(self, id):
+        """
+            Method which can be used to get specific order using his id
+
+            Expects: order id : int
+            Modifies: nothing
+            Returns: order
+        """
+
         order = Order.query.get(id)
         if not order:
             abort(404)
@@ -74,6 +98,14 @@ class GetJsonOrder(Resource):
 
     @marshal_with(resource_tour_fields)
     def delete(self, id):
+        """
+            Method which can be used to delete specific order using his id
+
+            Expects: order id : int
+            Modifies: order with specified id
+            Returns: deleted order
+        """
+
         order = Order.query.get(id)
         if not order:
             abort(404)
@@ -85,6 +117,14 @@ class GetJsonOrder(Resource):
 
     @marshal_with(resource_order_fields)
     def put(self, id):
+        """
+            Method which can be used to edit specific order using his id
+
+            Expects: order id : int
+            Modifies: order with specified id
+            Returns: edited order
+        """
+
         order = Order.query.get(id)
         if not order:
             abort(404)
@@ -115,6 +155,14 @@ class GetJsonOrder(Resource):
 class GetJsonTour(Resource):
     @marshal_with(resource_tour_fields)
     def get(self, id):
+        """
+            Method which can be used to get specific tour using his id
+
+            Expects: tour id : int
+            Modifies: nothing
+            Returns: order
+        """
+
         tour = Tour.query.get(id)
         if not tour:
             abort(404)
@@ -123,11 +171,59 @@ class GetJsonTour(Resource):
 
     @marshal_with(resource_tour_fields)
     def delete(self, id):
+        """
+            Method which can be used to delete specific tour using his id
+
+            Expects: tour id : int
+            Modifies: tour with specified id
+            Returns: deleted tour
+        """
+
         tour = Tour.query.get(id)
         if not tour:
             abort(404)
 
         db.session.delete(tour)
+        db.session.commit()
+
+        return tour
+
+    @marshal_with(resource_tour_fields)
+    def put(self, id):
+        """
+            Method which can be used to edit specific tour using his id
+
+            Expects: tour id : int
+            Modifies: tour with specified id
+            Returns: edited tour
+        """
+
+        tour = Tour.query.get(id)
+        if not tour:
+            abort(404)
+
+        args = tour_put_args.parse_args()
+
+        name = args.get('name', None)
+        if name:
+            tour.name = name
+
+        country = args.get('country', None)
+        if country:
+            tour.country = country
+
+        hotel = args.get('hotel', None)
+        if hotel:
+            tour.hotel = hotel
+
+        tour_includes = args.get('tour_includes', None)
+        if tour_includes:
+            tour.tour_includes = tour_includes
+
+        day_cost = args.get('day_cost', None)
+        if day_cost:
+            tour.day_cost = day_cost
+
         db.session.commit()
 
         return tour

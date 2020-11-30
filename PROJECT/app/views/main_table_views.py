@@ -12,7 +12,8 @@ class GetAllOrdersView(MethodView):
     def get(self):
         return render_template('tables/orders.html', **self.prepare_context(request.args))
 
-    def prepare_context(self, filters=None):
+    @staticmethod
+    def prepare_context(filters=None):
         title = 'Orders'
         add_button = 'add_order'
 
@@ -56,7 +57,8 @@ class GetAllClientsView(MethodView):
     def get(self):
         return render_template('tables/clients.html', **self.prepare_context(request.args))
 
-    def prepare_context(self, filters=None):
+    @staticmethod
+    def prepare_context(filters=None):
         title = 'Clients'
         add_button = 'add_client'
 
@@ -107,7 +109,8 @@ class GetAllToursView(MethodView):
     def get(self):
         return render_template('tables/tours.html', **self.prepare_context(request.args))
 
-    def prepare_context(self, filters=None):
+    @staticmethod
+    def prepare_context(filters=None):
         title = 'Tours'
         add_button = 'add_tour'
 
@@ -139,4 +142,3 @@ class GetAllToursView(MethodView):
 app.add_url_rule('/orders', view_func=GetAllOrdersView.as_view('get_all_orders'), methods=['GET', 'POST'])
 app.add_url_rule('/clients', view_func=GetAllClientsView.as_view('get_all_clients'), methods=['GET', 'POST'])
 app.add_url_rule('/tours', view_func=GetAllToursView.as_view('get_all_tours'), methods=['GET', 'POST'])
-
