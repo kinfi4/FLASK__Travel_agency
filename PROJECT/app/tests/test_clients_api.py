@@ -70,26 +70,46 @@ class TestClientApi:
         json = response.json()
 
         assert response.status_code == 200
-        assert json[0]['first_name'] <= json[1]['first_name'] <= json[2]['first_name'] <= json[3]['first_name']
+        for client_i in range(1, len(json)):
+            assert json[client_i - 1]['first_name'] <= json[client_i]['first_name']
 
     def test_get_clients_ordered_by_first_name_desc(self):
         response = requests.get(BASE + 'json_clients' + '?sort-input=first_name&desc=None')
         json = response.json()
 
         assert response.status_code == 200
-        assert json[0]['first_name'] >= json[1]['first_name'] >= json[2]['first_name'] >= json[3]['first_name']
+        for client_i in range(1, len(json)):
+            assert json[client_i - 1]['first_name'] >= json[client_i]['first_name']
 
     def test_get_clients_ordered_by_last_name(self):
         response = requests.get(BASE + 'json_clients' + '?sort-input=last_name')
         json = response.json()
 
         assert response.status_code == 200
-        assert json[0]['last_name'] <= json[1]['last_name'] <= json[2]['last_name'] <= json[3]['last_name']
+        for client_i in range(1, len(json)):
+            assert json[client_i - 1]['last_name'] <= json[client_i]['last_name']
 
     def test_get_clients_ordered_by_last_name_desc(self):
         response = requests.get(BASE + 'json_clients' + '?sort-input=last_name&desc=None')
         json = response.json()
 
         assert response.status_code == 200
-        assert json[0]['last_name'] >= json[1]['last_name'] >= json[2]['last_name'] >= json[3]['last_name']
+        for client_i in range(1, len(json)):
+            assert json[client_i - 1]['last_name'] >= json[client_i]['last_name']
+
+    def test_get_clients_ordered_by_orders(self):
+        response = requests.get(BASE + 'json_clients' + '?sort-input=num_orders')
+        json = response.json()
+
+        assert response.status_code == 200
+        for client_i in range(1, len(json)):
+            assert json[client_i - 1]['number_of_orders'] <= json[client_i]['number_of_orders']
+
+    def test_get_clients_ordered_by_orders_desc(self):
+        response = requests.get(BASE + 'json_clients' + '?sort-input=num_orders&desc=None')
+        json = response.json()
+
+        assert response.status_code == 200
+        for client_i in range(1, len(json)):
+            assert json[client_i - 1]['number_of_orders'] >= json[client_i]['number_of_orders']
 

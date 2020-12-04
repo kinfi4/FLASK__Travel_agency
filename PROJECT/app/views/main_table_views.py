@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 
 from flask import render_template, request
 from flask.views import MethodView
@@ -25,18 +25,18 @@ class GetAllOrdersView(MethodView):
                 from_date = date.fromisoformat(s_from_date)
                 by_date = date.fromisoformat(s_by_date)
 
-                by_date.replace(by_date.year, by_date.month, by_date.day + 1)
-                from_date.replace(from_date.year, from_date.month, from_date.day - 1)
+                by_date += timedelta(days=1)
+                from_date -= timedelta(days=1)
 
                 orders = Order.query.filter(Order.tour_date > from_date).filter(by_date > Order.tour_date)
             elif s_from_date:
                 from_date = date.fromisoformat(s_from_date)
-                from_date.replace(from_date.year, from_date.month, from_date.day - 1)
+                from_date -= timedelta(days=1)
 
                 orders = Order.query.filter(Order.tour_date >= from_date)
             elif s_by_date:
                 by_date = date.fromisoformat(s_by_date)
-                by_date.replace(by_date.year, by_date.month, by_date.day + 1)
+                by_date += timedelta(days=1)
 
                 orders = Order.query.filter(by_date >= Order.tour_date)
             else:

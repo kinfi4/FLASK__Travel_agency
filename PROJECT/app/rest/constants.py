@@ -27,7 +27,9 @@ resource_client_fields = {
     'first_name': fields.String,
     'last_name': fields.String,
     'email': fields.String,
-    'registration_date': fields.String
+    'registration_date': fields.String,
+
+    'number_of_orders': fields.Integer
 }
 
 resource_order_fields = {
@@ -35,7 +37,12 @@ resource_order_fields = {
     'tour_id': fields.Integer,
     'client_pass': fields.String,
     'tour_date': fields.String,
-    'days': fields.Integer
+    'days': fields.Integer,
+
+    'client_name': fields.String,
+    'tour_name': fields.String,
+    'tour_day_cost': fields.Float,
+    'total_cost': fields.Float
 }
 
 resource_tour_fields = {
@@ -44,5 +51,7 @@ resource_tour_fields = {
     'country': fields.String,
     'hotel': fields.String,
     'tour_includes': fields.String,
-    'day_cost': fields.Float
+    'day_cost': fields.Float,
+
+    'number_of_orders': fields.Integer
 }
