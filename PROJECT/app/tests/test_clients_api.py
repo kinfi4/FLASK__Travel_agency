@@ -4,16 +4,23 @@ import pytest
 BASE = 'http://127.0.0.1:5000/'
 
 
-class TestClientApi:
-    def test_post_a_client(self):
-        response = requests.post(BASE + 'json_clients', data={
+def post_client(password):
+    return requests.post(BASE + 'json_clients', data={
             'first_name': 'TestName',
             'last_name': 'TestSurname',
-            'passport': 'TestPassport',
+            'passport': password,
             'email': 'Test@test.net',
             'registration_date': '2020-12-31'
         })
 
+
+def delete_client(password):
+    return requests.delete(BASE + 'json_clients/' + password)
+
+
+class TestClientApi:
+    def test_post_a_client(self):
+        response = post_client('TestPassport')
         json = response.json()
 
         assert response.status_code == 200
@@ -48,8 +55,7 @@ class TestClientApi:
         assert json['email'] == 'Test@test.net'
 
     def test_delete_new_client(self):
-        response = requests.delete(BASE + 'json_clients/' + 'TestPassport')
-
+        response = delete_client('TestPassport')
         json = response.json()
 
         assert response.status_code == 200

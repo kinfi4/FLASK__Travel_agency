@@ -96,7 +96,7 @@ class GetJsonOrder(Resource):
 
         return order
 
-    @marshal_with(resource_tour_fields)
+    @marshal_with(resource_order_fields)
     def delete(self, id):
         """
             Method which can be used to delete specific order using his id

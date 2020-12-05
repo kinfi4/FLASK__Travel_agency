@@ -7,13 +7,19 @@
             <div class="formblock">
                 <label for="sort-input" class="sort-label">Sort by: </label>
                 <select name="sort-input" id="sort-input" class="sort-input">
-                    <option value="first_name">First name</option>
-                    <option value="last_name">Last name</option>
-                    <option value="num_orders">Number of orders</option>
+                    {% for sort in sort_by %}
+                        <option value="{{ sort[1] }}">{{ sort[0] }}</option>
+                    {% endfor %}
                 </select>
                 <br>
                 <label for="desc">Descending</label>
-                <input type="checkbox" id="desc" name="desc" value="{{ desc }}">
+
+                {% if desc %}
+                    <input type="checkbox" id="desc" name="desc" value="{{ desc }}" checked="checked">
+                {% else %}
+                    <input type="checkbox" id="desc" name="desc" value="{{ desc }}">
+                {% endif %}
+
 
             </div>
 

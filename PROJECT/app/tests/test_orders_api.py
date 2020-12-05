@@ -1,29 +1,30 @@
 import requests
 
 from app.models import Order
-
+from app.tests.test_clients_api import post_client, delete_client
 
 BASE = 'http://127.0.0.1:5000/'
 
 
 class TestOrdersApi:
     def test_post_a_order(self):
+        post_client('unique_pass')
         response = requests.post(BASE + 'json_orders', data={
-            'client_pass': 'TestPass',
-            'tour_id': 1,
-            'days': 10,
-            'tour_date': '1920-12-12'
+            "client_pass": "unique_pass",
+            "tour_id": 1,
+            "days": 10,
+            "tour_date": "1920-12-12"
         })
 
         json = response.json()
 
         assert response.status_code == 200
-        assert json['client_pass'] == 'TestPass'
+        assert json['client_pass'] == 'unique_pass'
         assert json['tour_id'] == 1
         assert json['tour_date'] == '1920-12-12'
 
     def test_put_a_order(self):
-        order = Order.query.filter('client_pass' == 'TestPass' and 'tour_id' == 1 and 'tour_date' == '1920-12-12').first()
+        order = Order.query.filter(Order.client_pass == 'unique_pass').first()
 
         response = requests.put(BASE + 'json_orders/' + f'{order.id}', data={
             'tour_date': '1921-12-12'
@@ -32,31 +33,32 @@ class TestOrdersApi:
         json = response.json()
 
         assert response.status_code == 200
-        assert json['client_pass'] == 'TestPass'
+        assert json['client_pass'] == 'unique_pass'
         assert json['tour_date'] == '1921-12-12'
 
     def test_get_new_order(self):
-        order = Order.query.filter('client_pass' == 'TestPass' and 'tour_id' == 1 and 'tour_date' == '1920-12-12').first()
+        order = Order.query.filter(Order.client_pass == 'unique_pass').first()
 
         response = requests.get(BASE + 'json_orders/' + f'{order.id}')
 
         json = response.json()
 
         assert response.status_code == 200
-        assert json['client_pass'] == 'TestPass'
+        assert json['client_pass'] == 'unique_pass'
         assert json['tour_date'] == '1921-12-12'
         assert json['tour_id'] == 1
 
     def test_delete_new_order(self):
-        order = Order.query.filter('client_pass' == 'TestPass' and 'tour_id' == 1 and 'tour_date' == '1920-12-12').first()
+        delete_client('unique_pass')
+        order = Order.query.filter(Order.client_pass == 'unique_pass').first()
 
         response = requests.delete(BASE + 'json_orders/' + f'{order.id}')
 
         json = response.json()
 
         assert response.status_code == 200
-        assert json['client_pass'] == 'TestPass'
-        assert json['tour_date'] == '1921-12-01'
+        assert json['client_pass'] == 'unique_pass'
+        assert json['tour_date'] == '1921-12-12'
         assert json['tour_id'] == 1
 
     def test_get_orders_ordered_by_from_date(self):
