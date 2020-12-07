@@ -1,6 +1,7 @@
 import requests
 
 from app.models import Tour
+from app.rest.get_all__API import GetJsonTours
 
 BASE = 'http://127.0.0.1:5000/'
 
@@ -68,11 +69,29 @@ class TestToursApi:
         assert json['hotel'] == 'TestHotel'
         assert json['day_cost'] == 150
 
-    def test_filter_tours(self):
-        response = requests.get(BASE + 'json_tours' + '?from_price=150&by_price=250')
+    def test_filter_tours_from_by(self):
+        response = list(GetJsonTours.filter_tours({
+            'from_price': 150,
+            'by_price': 250
+        }))
 
-        json = response.json()
+        for tour in response:
+            assert 250 >= tour.day_cost >= 150
 
-        assert response.status_code == 200
-        for tour in json:
-            assert 250 >= tour['day_cost'] >= 150
+    def test_filter_tours_from(self):
+        response = list(GetJsonTours.filter_tours({
+            'from_price': 150
+        }))
+
+        for tour in response:
+            assert tour.day_cost >= 150
+
+    def test_filter_tours_by(self):
+        response = list(GetJsonTours.filter_tours({
+            'by_price': 200
+        }))
+
+        for tour in response:
+            assert 200 >= tour.day_cost
+
+

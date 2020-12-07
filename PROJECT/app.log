@@ -1,0 +1,5 @@
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [05/Dec/2020 13:43:53] "[37mGET /orders HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Detected change in '/home/kini4/python/Travel_agency/PROJECT/app/__init__.py', reloading
+INFO:werkzeug: * Restarting with stat

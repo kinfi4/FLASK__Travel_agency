@@ -1,3 +1,5 @@
+import logging
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -18,4 +20,7 @@ from app import views, models, rest
 
 
 if __name__ == '__main__':
+    open('app.log', 'a').close()
+    logging.basicConfig(filename='app.log', level=logging.DEBUG)
+
     app.run(debug=True)

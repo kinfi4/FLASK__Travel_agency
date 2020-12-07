@@ -1,9 +1,12 @@
 import requests
+from datetime import datetime
 
 from app.models import Order
 from app.tests.test_clients_api import post_client, delete_client
+from app.rest.get_all__API import GetJsonOrders
 
 BASE = 'http://127.0.0.1:5000/'
+DATE_FORMAT = '%Y-%m-%d'
 
 
 class TestOrdersApi:
@@ -62,9 +65,27 @@ class TestOrdersApi:
         assert json['tour_id'] == 1
 
     def test_get_orders_ordered_by_from_date(self):
-        response = requests.get(BASE + 'json_orders' + '?tour_date_from=2020-12-01&tour_date_by=2020-12-31')
-        json = response.json()
+        response = list(GetJsonOrders.filter_orders({
+            'tour_date_from': '2020-12-01',
+            'tour_date_by': '2020-12-31'
+        }))
 
-        assert response.status_code == 200
-        for order in json:
-            assert '2020-12-31' >= order['tour_date'] >= '2020-12-01'
+        for order in response:
+            assert datetime.strptime('2020-12-31', DATE_FORMAT).date() >= order.tour_date >= datetime.strptime(
+                '2020-12-01', DATE_FORMAT).date()
+
+    def test_get_orders_ordered_from_date(self):
+        response = list(GetJsonOrders.filter_orders({
+            'tour_date_from': '2020-12-01',
+        }))
+
+        for order in response:
+            assert order.tour_date >= datetime.strptime('2020-12-01', DATE_FORMAT).date()
+
+    def test_get_orders_ordered_by_date(self):
+        response = list(GetJsonOrders.filter_orders({
+            'tour_date_by': '2020-11-30'
+        }))
+
+        for order in response:
+            assert datetime.strptime('2020-12-31', DATE_FORMAT).date() >= order.tour_date
