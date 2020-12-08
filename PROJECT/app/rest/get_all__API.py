@@ -7,6 +7,7 @@ from app import api, db
 from app.models import Client, Order, Tour
 from app.rest.constants import resource_order_fields, resource_tour_fields, resource_client_fields, tour_put_args, \
     order_put_args, client_put_args
+from app.service.CREATE_operator import add_object_to_db
 
 
 class GetJsonClients(Resource):
@@ -64,16 +65,7 @@ class GetJsonClients(Resource):
             Returns: created client
         """
         args = client_put_args.parse_args()
-
-        client = Client()
-        client.passport = args.get('passport', None)
-        client.first_name = args.get('first_name', None)
-        client.last_name = args.get('last_name', None)
-        client.email = args.get('email', None)
-        client.registration_date = args.get('registration_date', None)
-
-        db.session.add(client)
-        db.session.commit()
+        client = add_object_to_db(Client, **args)
 
         return client
 
@@ -134,15 +126,7 @@ class GetJsonOrders(Resource):
             Returns: created order
         """
         args = order_put_args.parse_args()
-
-        order = Order()
-        order.client_pass = args.get('client_pass', None)
-        order.tour_id = args.get('tour_id', None)
-        order.days = args.get('days', None)
-        order.tour_date = args.get('tour_date', None)
-
-        db.session.add(order)
-        db.session.commit()
+        order = add_object_to_db(Order, **args)
 
         return order
 
@@ -199,16 +183,7 @@ class GetJsonTours(Resource):
             Returns: created tour
         """
         args = tour_put_args.parse_args()
-
-        tour = Tour()
-        tour.name = args.get('name', None)
-        tour.country = args.get('country', None)
-        tour.hotel = args.get('hotel', None)
-        tour.tour_includes = args.get('tour_includes', None)
-        tour.day_cost = args.get('day_cost', None)
-
-        db.session.add(tour)
-        db.session.commit()
+        tour = add_object_to_db(Tour, **args)
 
         return tour
 

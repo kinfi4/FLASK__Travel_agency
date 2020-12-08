@@ -1,9 +1,11 @@
+import requests
 from flask import render_template, redirect, url_for
 from flask.views import MethodView
 
 from app import app, db
 from app.form import AddEditOrderForm, AddEditClientForm, AddEditTourForm
 from app.models import Client, Order, Tour
+from app.tests.test_clients_api import BASE
 
 
 # Add Views
@@ -14,19 +16,13 @@ class ControlOrderView(MethodView):
     def post(self):
         form = AddEditOrderForm()
 
-        print(form.client_pass.data.split()[0])
-        print(form.tour_id.data.split()[0])
-
         if form.validate_on_submit():
-            order = Order()
-
-            order.client_pass = form.client_pass.data.split()[0]
-            order.tour_date = form.tour_date.data
-            order.tour_id = form.tour_id.data.split()[0]
-            order.days = form.days.data
-
-            db.session.add(order)
-            db.session.commit()
+            requests.post(BASE + 'json_orders', data={
+                'client_pass': form.client_pass.data.split()[0],
+                'tour_date': form.tour_date.data,
+                'tour_id': form.tour_id.data.split()[0],
+                'days': form.days.data
+            })
 
         return redirect(url_for('get_all_orders'))
 
@@ -61,17 +57,15 @@ class ControlClientView(MethodView):
 
     def post(self):
         form = AddEditClientForm()
-        client = Client()
 
         if form.validate_on_submit():
-            client.first_name = form.first_name.data
-            client.last_name = form.second_name.data
-            client.passport = form.passport.data
-            client.email = form.email.data
-            client.registration_date = form.register_date.data
-
-            db.session.add(client)
-            db.session.commit()
+            requests.post(BASE + 'json_clients', data={
+                'first_name': form.first_name.data,
+                'last_name': form.second_name.data,
+                'passport': form.passport.data,
+                'email': form.email.data,
+                'registration_date': form.register_date.data
+            })
 
         return redirect(url_for('get_all_clients'))
 
@@ -97,15 +91,13 @@ class ControlTourView(MethodView):
         form = AddEditTourForm()
 
         if form.validate_on_submit():
-            tour = Tour()
-            tour.hotel = form.hotel_name.data
-            tour.name = form.tour_name.data
-            tour.day_cost = form.day_cost.data
-            tour.tour_includes = form.tour_includes.data
-            tour.country = form.country.data
-
-            db.session.add(tour)
-            db.session.commit()
+            requests.post(BASE + 'json_tours', data={
+                'hotel': form.hotel_name.data,
+                'name': form.tour_name.data,
+                'day_cost': form.day_cost.data,
+                'tour_includes': form.tour_includes.data,
+                'country': form.country.data
+            })
 
             return redirect(url_for('get_all_tours'))
 

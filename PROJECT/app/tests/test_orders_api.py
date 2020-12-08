@@ -52,11 +52,10 @@ class TestOrdersApi:
         assert json['tour_id'] == 1
 
     def test_delete_new_order(self):
-        delete_client('unique_pass')
         order = Order.query.filter(Order.client_pass == 'unique_pass').first()
-
         response = requests.delete(BASE + 'json_orders/' + f'{order.id}')
 
+        delete_client('unique_pass')
         json = response.json()
 
         assert response.status_code == 200

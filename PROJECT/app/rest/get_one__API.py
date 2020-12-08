@@ -37,6 +37,11 @@ class GetJsonClient(Resource):
         if not client:
             abort(404)
 
+        orders = Order.query.filter(Order.client_pass == client.passport)
+        for order in orders:
+            db.session.delete(order)
+            db.session.commit()
+
         db.session.delete(client)
         db.session.commit()
 
@@ -182,6 +187,10 @@ class GetJsonTour(Resource):
         tour = Tour.query.get(id)
         if not tour:
             abort(404)
+
+        orders = Order.query.filter(Order.tour_id == tour.id)
+        for order in orders:
+            db.session.delete(order)
 
         db.session.delete(tour)
         db.session.commit()

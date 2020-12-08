@@ -1,37 +1,30 @@
+import requests
 from flask import redirect, url_for
 from flask.views import MethodView
 
 from app import app, db
-from app.models import Client, Order, Tour
+
+BASE = 'http://127.0.0.1:5000/'
 
 
 # Delete Views
 class DeleteTourView(MethodView):
     def post(self, id):
-        tour = Tour.query.get(id)
-
-        db.session.delete(tour)
-        db.session.commit()
+        requests.delete(BASE + 'json_tours/' + f'{id}')
 
         return redirect(url_for('get_all_tours'))
 
 
 class DeleteOrderView(MethodView):
     def post(self, id):
-        order = Order.query.get(id)
-
-        db.session.delete(order)
-        db.session.commit()
+        requests.delete(BASE + 'json_orders/' + f'{id}')
 
         return redirect(url_for('get_all_orders'))
 
 
 class DeleteClientView(MethodView):
     def post(self, passport):
-        client = Client.query.get(passport)
-
-        db.session.delete(client)
-        db.session.commit()
+        requests.delete(BASE + 'json_clients/' + f'{passport}')
 
         return redirect(url_for('get_all_clients'))
 

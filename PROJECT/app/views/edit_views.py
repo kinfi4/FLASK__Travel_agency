@@ -1,36 +1,35 @@
-from flask import render_template, redirect, url_for
+import requests
+from flask import render_template, redirect, url_for, abort
 from flask.views import MethodView
 
 from app.form import AddEditTourForm, AddEditClientForm, AddEditOrderForm
 from app import app, db
 from app.models import Client, Order, Tour
+from app.tests.test_clients_api import BASE
 
 
 # Edit Views
 class EditTourView(MethodView):
     def get(self, id):
-        try:
-            tour = Tour.query.get(id)
-        except:
-            return redirect(url_for('get_all_tours'))
+        tour = Tour.query.get(id)
+        if not tour:
+            abort(404)
 
         return render_template('add_edit_forms/add-edit_tour.html', **self.prepare_context(tour))
 
     def post(self, id):
-        try:
-            tour = Tour.query.get(id)
-        except:
-            return redirect(url_for('get_all_tours'))
+        if not Tour.query.get(id):
+            abort(404)
 
         form = AddEditTourForm()
         if form.validate_on_submit():
-            tour.hotel = form.hotel_name.data
-            tour.name = form.tour_name.data
-            tour.day_cost = form.day_cost.data
-            tour.tour_includes = form.tour_includes.data
-            tour.country = form.country.data
-
-            db.session.commit()
+            requests.put(BASE + 'json_tours', data={
+                'hotel': form.hotel_name.data,
+                'name': form.tour_name.data,
+                'day_cost': form.day_cost.data,
+                'tour_includes': form.tour_includes.data,
+                'country': form.country.data
+            })
 
         return redirect(url_for('get_all_tours'))
 
@@ -56,29 +55,24 @@ class EditTourView(MethodView):
 
 class EditOrderView(MethodView):
     def get(self, id):
-        try:
-            order = Order.query.get(id)
-        except:
-            return redirect(url_for('get_all_orders'))
+        order = Order.query.get(id)
+        if not order:
+            abort(404)
 
         return render_template('add_edit_forms/add-edit_order.html', **self.prepare_context(order))
 
     def post(self, id):
-        try:
-            order = Order.query.get(id)
-        except:
-            return redirect(url_for('get_all_orders'))
+        if not Order.query.get(id):
+            abort(404)
 
         form = AddEditOrderForm()
-
-        print(form.validate_on_submit())
-        print(form.errors)
-
         if form.validate_on_submit():
-            order.tour_date = form.tour_date.data
-            order.tour_id = form.tour_id.data.split()[0]
-            order.client_pass = form.client_pass.data.split()[0]
-            order.days = form.days.data
+            requests.put(BASE + 'json_orders', data={
+                'client_pass': form.client_pass.data.split()[0],
+                'tour_date': form.tour_date.data,
+                'tour_id': form.tour_id.data.split()[0],
+                'days': form.days.data
+            })
 
             db.session.commit()
 
@@ -117,28 +111,25 @@ class EditOrderView(MethodView):
 
 class EditClientView(MethodView):
     def get(self, passport):
-        try:
-            client = Client.query.get(passport)
-        except:
-            return redirect(url_for('get_all_clients'))
+        client = Client.query.get(passport)
+        if not client:
+            abort(404)
 
         return render_template('add_edit_forms/add-edit_client.html', **self.prepare_context(client))
 
     def post(self, passport):
-        try:
-            client = Client.query.get(passport)
-        except:
-            return redirect(url_for('get_all_clients'))
+        if not Client.query.get(passport):
+            abort(404)
 
         form = AddEditClientForm()
         if form.validate_on_submit():
-            client.first_name = form.first_name.data
-            client.last_name = form.second_name.data
-            client.passport = form.passport.data
-            client.registration_date = form.register_date.data
-            client.email = form.email.data
-
-            db.session.commit()
+            requests.put(BASE + 'json_clients', data={
+                'first_name': form.first_name.data,
+                'last_name': form.second_name.data,
+                'passport': form.passport.data,
+                'email': form.email.data,
+                'registration_date': form.register_date.data
+            })
 
         return redirect(url_for('get_all_clients'))
 
