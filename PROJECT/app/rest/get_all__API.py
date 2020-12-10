@@ -7,7 +7,7 @@ from app import api, db
 from app.models import Client, Order, Tour
 from app.rest.constants import resource_order_fields, resource_tour_fields, resource_client_fields, tour_put_args, \
     order_put_args, client_put_args
-from app.service.CREATE_operator import add_object_to_db
+from app.service.CREATE_operators import add_object_to_db
 
 
 class GetJsonClients(Resource):

@@ -5,6 +5,8 @@ from app import api, db
 from app.models import Client, Order, Tour
 from app.rest.constants import resource_order_fields, resource_tour_fields, resource_client_fields, tour_put_args, \
     order_put_args, client_put_args
+from app.service.UPDATE_operators import update_cliente, update_order, update_tour
+from app.service.DELETE_operators import delete_client, delete_order, delete_tour
 
 
 class GetJsonClient(Resource):
@@ -32,18 +34,9 @@ class GetJsonClient(Resource):
             Modifies: nothing
             Returns: client
         """
-
-        client = Client.query.get(passport)
+        client = delete_client(passport)
         if not client:
             abort(404)
-
-        orders = Order.query.filter(Order.client_pass == client.passport)
-        for order in orders:
-            db.session.delete(order)
-            db.session.commit()
-
-        db.session.delete(client)
-        db.session.commit()
 
         return client
 
@@ -56,30 +49,11 @@ class GetJsonClient(Resource):
             Modifies: nothing
             Returns: client
         """
+        data = client_put_args.parse_args()
+        client = update_cliente(passport, data)
 
-        client = Client.query.get(passport)
         if not client:
             abort(404)
-
-        args = client_put_args.parse_args()
-
-        first_name = args.get('first_name', None)
-        if first_name:
-            client.first_name = first_name
-
-        last_name = args.get('last_name', None)
-        if last_name:
-            client.last_name = last_name
-
-        email = args.get('email', None)
-        if email:
-            client.email = email
-
-        registration_date = args.get('registration_date', None)
-        if registration_date:
-            client.registration_date = registration_date
-
-        db.session.commit()
 
         return client
 
@@ -111,12 +85,9 @@ class GetJsonOrder(Resource):
             Returns: deleted order
         """
 
-        order = Order.query.get(id)
+        order = delete_order(id)
         if not order:
             abort(404)
-
-        db.session.delete(order)
-        db.session.commit()
 
         return order
 
@@ -130,29 +101,9 @@ class GetJsonOrder(Resource):
             Returns: edited order
         """
 
-        order = Order.query.get(id)
+        order = update_order(id, order_put_args.parse_args())
         if not order:
             abort(404)
-
-        args = order_put_args.parse_args()
-
-        tour_id = args.get('tour_id', None)
-        if tour_id:
-            order.tour_id = tour_id
-
-        client_pass = args.get('client_pass', None)
-        if client_pass:
-            order.client_pass = client_pass
-
-        tour_date = args.get('tour_date', None)
-        if tour_date:
-            order.tour_date = tour_date
-
-        days = args.get('days', None)
-        if days:
-            order.days = days
-
-        db.session.commit()
 
         return order
 
@@ -183,17 +134,9 @@ class GetJsonTour(Resource):
             Modifies: tour with specified id
             Returns: deleted tour
         """
-
-        tour = Tour.query.get(id)
+        tour = delete_tour(id)
         if not tour:
             abort(404)
-
-        orders = Order.query.filter(Order.tour_id == tour.id)
-        for order in orders:
-            db.session.delete(order)
-
-        db.session.delete(tour)
-        db.session.commit()
 
         return tour
 
@@ -207,33 +150,9 @@ class GetJsonTour(Resource):
             Returns: edited tour
         """
 
-        tour = Tour.query.get(id)
+        tour = update_tour(id, tour_put_args.parse_args())
         if not tour:
             abort(404)
-
-        args = tour_put_args.parse_args()
-
-        name = args.get('name', None)
-        if name:
-            tour.name = name
-
-        country = args.get('country', None)
-        if country:
-            tour.country = country
-
-        hotel = args.get('hotel', None)
-        if hotel:
-            tour.hotel = hotel
-
-        tour_includes = args.get('tour_includes', None)
-        if tour_includes:
-            tour.tour_includes = tour_includes
-
-        day_cost = args.get('day_cost', None)
-        if day_cost:
-            tour.day_cost = day_cost
-
-        db.session.commit()
 
         return tour
 
