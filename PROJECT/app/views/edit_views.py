@@ -23,7 +23,7 @@ class EditTourView(MethodView):
 
         form = AddEditTourForm()
         if form.validate_on_submit():
-            requests.put(BASE + 'json_tours', data={
+            requests.put(BASE + 'json_tours/' + str(id), data={
                 'hotel': form.hotel_name.data,
                 'name': form.tour_name.data,
                 'day_cost': form.day_cost.data,
@@ -67,7 +67,7 @@ class EditOrderView(MethodView):
 
         form = AddEditOrderForm()
         if form.validate_on_submit():
-            requests.put(BASE + 'json_orders', data={
+            requests.put(BASE + 'json_orders/' + str(id), data={
                 'client_pass': form.client_pass.data.split()[0],
                 'tour_date': form.tour_date.data,
                 'tour_id': form.tour_id.data.split()[0],
@@ -123,7 +123,7 @@ class EditClientView(MethodView):
 
         form = AddEditClientForm()
         if form.validate_on_submit():
-            requests.put(BASE + 'json_clients', data={
+            requests.put(BASE + 'json_clients/' + str(passport), data={
                 'first_name': form.first_name.data,
                 'last_name': form.second_name.data,
                 'passport': form.passport.data,

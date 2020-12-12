@@ -1,7 +1,7 @@
 import requests
 
 from app.models import Tour
-from app.rest.get_all__API import GetJsonTours
+from app.service.READ_operators import get_tours
 
 BASE = 'http://127.0.0.1:5000/'
 
@@ -70,7 +70,7 @@ class TestToursApi:
         assert json['day_cost'] == 150
 
     def test_filter_tours_from_by(self):
-        response = list(GetJsonTours.filter_tours({
+        response = list(get_tours({
             'from_price': 150,
             'by_price': 250
         }))
@@ -79,7 +79,7 @@ class TestToursApi:
             assert 250 >= tour.day_cost >= 150
 
     def test_filter_tours_from(self):
-        response = list(GetJsonTours.filter_tours({
+        response = list(get_tours({
             'from_price': 150
         }))
 
@@ -87,7 +87,7 @@ class TestToursApi:
             assert tour.day_cost >= 150
 
     def test_filter_tours_by(self):
-        response = list(GetJsonTours.filter_tours({
+        response = list(get_tours({
             'by_price': 200
         }))
 

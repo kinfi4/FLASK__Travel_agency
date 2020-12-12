@@ -10,3 +10,4 @@ def add_object_to_db(cls, **kwargs):
     db.session.commit()
 
     return obj
+

@@ -3,7 +3,8 @@ from datetime import datetime
 
 from app.models import Order
 from app.tests.test_clients_api import post_client, delete_client
-from app.rest.get_all__API import GetJsonOrders
+from app.service.READ_operators import get_orders
+
 
 BASE = 'http://127.0.0.1:5000/'
 DATE_FORMAT = '%Y-%m-%d'
@@ -64,7 +65,7 @@ class TestOrdersApi:
         assert json['tour_id'] == 1
 
     def test_get_orders_ordered_by_from_date(self):
-        response = list(GetJsonOrders.filter_orders({
+        response = list(get_orders({
             'tour_date_from': '2020-12-01',
             'tour_date_by': '2020-12-31'
         }))
@@ -74,7 +75,7 @@ class TestOrdersApi:
                 '2020-12-01', DATE_FORMAT).date()
 
     def test_get_orders_ordered_from_date(self):
-        response = list(GetJsonOrders.filter_orders({
+        response = list(get_orders({
             'tour_date_from': '2020-12-01',
         }))
 
@@ -82,7 +83,7 @@ class TestOrdersApi:
             assert order.tour_date >= datetime.strptime('2020-12-01', DATE_FORMAT).date()
 
     def test_get_orders_ordered_by_date(self):
-        response = list(GetJsonOrders.filter_orders({
+        response = list(get_orders({
             'tour_date_by': '2020-11-30'
         }))
 

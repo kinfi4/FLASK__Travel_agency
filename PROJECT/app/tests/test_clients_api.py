@@ -1,5 +1,5 @@
 import requests
-from app.rest.get_all__API import GetJsonClients
+from app.service.READ_operators import get_clients
 BASE = 'http://127.0.0.1:5000/'
 
 
@@ -71,7 +71,7 @@ class TestClientApi:
         assert response.json()['last_name'] == 'Lisoviec'
 
     def test_get_clients_ordered_by_first_name(self):
-        response = list(GetJsonClients.filter_clients({
+        response = list(get_clients({
             'sort-input': 'first_name'
         }))
 
@@ -79,7 +79,7 @@ class TestClientApi:
             assert response[client_i - 1].first_name <= response[client_i].first_name
 
     def test_get_clients_ordered_by_first_name_desc(self):
-        response = list(GetJsonClients.filter_clients({
+        response = list(get_clients({
             'sort-input': 'first_name',
             'desc': True
         }))
@@ -88,7 +88,7 @@ class TestClientApi:
             assert response[client_i - 1].first_name >= response[client_i].first_name
 
     def test_get_clients_ordered_by_last_name(self):
-        response = list(GetJsonClients.filter_clients({
+        response = list(get_clients({
             'sort-input': 'last_name'
         }))
 
@@ -96,7 +96,7 @@ class TestClientApi:
             assert response[client_i - 1].last_name <= response[client_i].last_name
 
     def test_get_clients_ordered_by_last_name_desc(self):
-        response = list(GetJsonClients.filter_clients({
+        response = list(get_clients({
             'sort-input': 'last_name',
             'desc': True
         }))
@@ -105,7 +105,7 @@ class TestClientApi:
             assert response[client_i - 1].last_name >= response[client_i].last_name
 
     def test_get_clients_ordered_by_orders(self):
-        response = list(GetJsonClients.filter_clients({
+        response = list(get_clients({
             'sort-input': 'num_orders'
         }))
 
@@ -113,7 +113,7 @@ class TestClientApi:
             assert response[client_i - 1].number_of_orders <= response[client_i].number_of_orders
 
     def test_get_clients_ordered_by_orders_desc(self):
-        response = list(GetJsonClients.filter_clients({
+        response = list(get_clients({
             'sort-input': 'num_orders',
             'desc': True
         }))
